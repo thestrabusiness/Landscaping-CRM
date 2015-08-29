@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @client.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @client.last_name %>
+</p>
+
+<p>
+  <strong>Billing address:</strong>
+  <%= @client.billing_address %>
+</p>
+
+<p>
+  <strong>Job address:</strong>
+  <%= @client.job_address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @client.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @client.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @client.zip %>
+</p>
+
+<p>
+  <strong>Cut:</strong>
+  <%= @client.cut %>
+</p>
+
+<p>
+  <strong>Mulch:</strong>
+  <%= @client.mulch %>
+</p>
+
+<p>
+  <strong>Bushes:</strong>
+  <%= @client.bush %>
+</p>
+
+<p>
+  <strong>Spring clean-up:</strong>
+  <%= @client.spring %>
+</p>
+
+<p>
+  <strong>Fall clean-up:</strong>
+  <%= @client.fall %>
+</p>
+
+<p>
+  <strong>Snow Removal:</strong>
+  <%= @client.snow %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>
