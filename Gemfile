@@ -1,15 +1,15 @@
-﻿source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 group :production do
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 group :development do
-  gem 'pg'
+  gem 'sqlite3'
 end
 
 # Use SCSS for stylesheets
@@ -20,8 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-# PostgreSQL gem
-gem 'pg'
 # Copy existing database schema to schema.rb file
 gem 'schema_to_scaffold'
 
