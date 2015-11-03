@@ -8,6 +8,13 @@ one:
   city: MyString
   state: MyString
   zip: MyString
+  cut: 
+  mulch: 
+  bush: 
+  spring: 
+  fall: 
+  snow: 
+  balance: 
 
 two:
   first_name: MyString
@@ -17,3 +24,10 @@ two:
   city: MyString
   state: MyString
   zip: MyString
+  cut: 
+  mulch: 
+  bush: 
+  spring: 
+  fall: 
+  snow: 
+  balance: 

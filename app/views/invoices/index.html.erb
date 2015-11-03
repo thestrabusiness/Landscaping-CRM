@@ -20,7 +20,7 @@
       <tbody>
         <% @invoices.each do |invoice| %>
           <tr>
-            <td><%= invoice.date %></td>
+            <td><%= invoice.date.strftime("%m-%d-%y") %></td>
             <td><%= invoice.client.first_name %> <%= invoice.client.last_name %> </td>
             <td><%= invoice.performed_by %></td>
             <td><%= invoice.status %></td>

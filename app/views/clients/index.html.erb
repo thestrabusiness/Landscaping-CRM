@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Clients</h1>
+<br>
+<%= link_to 'New Client', new_client_path %>
+<br>
 
 <div class="media">
   <div class="media-body">
@@ -42,4 +45,17 @@
 
 <br>
 
-<%= link_to 'New Client', new_client_path %>
+<h3>Import Clients</h3>
+<%= form_tag import_clients_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload Clients", class: 'btn btn-default' %>
+<% end %>
+
+<h3>Import Client Prices</h3>
+<%= form_tag import_recurring_prices_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload Prices", class: 'btn btn-default' %>
+<% end %>
+
+<h3>Download client records</h3>
+<%= link_to "Download", clients_path(format: "csv"), class: 'btn btn-default' %>

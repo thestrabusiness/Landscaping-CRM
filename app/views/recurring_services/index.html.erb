@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Recurring Services</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><h4>Name</h4></th>
+        </tr>
+      </thead>
+
+  <tbody>
+    <% @recurring_services.each do |recurring_service| %>
+      <tr>
+        <td><h4><%= recurring_service.name %></h4></td>
+        <td><h4><%= link_to 'Show', recurring_service %></h4></td>
+        <td><h4><%= link_to 'Edit', edit_recurring_service_path(recurring_service) %></h4></td>
+        <td><h4><%= link_to 'Destroy', recurring_service, method: :delete, data: { confirm: 'Are you sure?' } %></h4></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recurring service', new_recurring_service_path %>

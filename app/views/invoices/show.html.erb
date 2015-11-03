@@ -2,7 +2,7 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @invoice.date %>
+  <%= @invoice.date.strftime("%m-%d-%y") %>
 </p>
 
 <p>
@@ -22,8 +22,53 @@
 
 <p>
   <strong>Client:</strong>
-  <%= @invoice.client %>
+  <%= @invoice.client.first_name %> <%= @invoice.client.last_name %>
 </p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Total</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @services.each do |service| %>
+        <tr>
+          <% if service.name.downcase == 'cut' %>
+            <td><h4><%= @invoice.date.strftime( "%B" ) %> Lawncare</h4></td>
+            <% else %>
+            <td><h4><%= service.name %></h4></td>
+            <%end %>            
+            <td><h4><%= service.category  %></h4></td>
+            <td><h4><%= service.quantity %></h4></td>
+            <td><h4><%= number_to_currency(service.price) %> </h4></td>
+            <td><h4><%= number_to_currency(service.price * service.quantity) %> </h4></td> 
+            <td><h4><%= link_to "Delete", [@invoice, service], method: :delete, confirm: "Are you sure you want to delete this service?" %></h4></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to "Add new item", new_invoice_service_path(@invoice), class: 'pull-right' %>
+
+<br>
+
+<h4 class='pull-right'> Invoice total: <%= number_to_currency(@invoice.total) %> </h4>
+
+<br><br>
+
+<div class='pull-right'> <%= button_to "Set Status to 'Sent'", set_sent_invoice_path(@invoice), method: :put %> <%= button_to "Set Status to Paid", set_paid_invoice_path(@invoice), method: :put %> </div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>
+
+

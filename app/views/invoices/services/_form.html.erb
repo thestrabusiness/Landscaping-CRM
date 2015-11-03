@@ -1,0 +1,43 @@
+<%= form_for [@invoice, @service] do |f| %>
+<% javascript_include_tag "services" %>
+
+  <div class="control-group">
+    <%= f.label :name %>
+    <div class="controls">
+      <% options = options_from_collection_for_select(@recurring_prices, 'name', 'name') %>
+      <%= f.select :name, options, :prompt => 'Choose a service', :include_blank => 'Other', :id => 'service_name' %>      
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= label_tag :other_service %><br>
+      <%= text_field_tag :other_service_name %>      
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :category %><br>
+    <div class="controls">
+      <%= f.select(
+        :category,
+          options_for_select(
+            [
+              ["Maintenance", "Maintenance"],
+              ["Seasonal", "Seasonal"]
+            ]
+            )
+        ) %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= label_tag :price %><br>
+    <%= number_field_tag :new_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>  
+  </div>
+<% end %>

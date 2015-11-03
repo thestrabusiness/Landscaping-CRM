@@ -1,0 +1,2 @@
+module RecurringPricesHelper
+end

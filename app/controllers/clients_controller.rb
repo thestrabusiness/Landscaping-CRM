@@ -5,11 +5,19 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = Client.all
+    
+  respond_to do |format|
+      format.html
+      format.csv { render text: @clients.to_csv }
+    end
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @client = Client.find(params[:id])
+    @recurring_prices = @client.recurring_prices
+    @recurring_services = RecurringService.all
   end
 
   # GET /clients/new
@@ -25,9 +33,10 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
+    @client.balance = 0
     
-    client_id_max = Client.maximum("client_id")
-    @client.client_id = client_id_max + 1
+    #client_id_max = Client.maximum("id")
+    #@client.id = client_id_max + 1
     
     respond_to do |format|
       if @client.save
@@ -63,6 +72,12 @@ class ClientsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def import
+    Client.import(params[:file])
+    redirect_to clients_path, notice: "Clients added succesfully!"
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -18,7 +18,7 @@ class ClientsControllerTest < ActionController::TestCase
 
   test "should create client" do
     assert_difference('Client.count') do
-      post :create, client: { billing_address: @client.billing_address, city: @client.city, first_name: @client.first_name, job_address: @client.job_address, last_name: @client.last_name, state: @client.state, zip: @client.zip }
+      post :create, client: { balance: @client.balance, billing_address: @client.billing_address, bush: @client.bush, city: @client.city, cut: @client.cut, fall: @client.fall, first_name: @client.first_name, job_address: @client.job_address, last_name: @client.last_name, mulch: @client.mulch, snow: @client.snow, spring: @client.spring, state: @client.state, zip: @client.zip }
     end
 
     assert_redirected_to client_path(assigns(:client))
@@ -35,7 +35,7 @@ class ClientsControllerTest < ActionController::TestCase
   end
 
   test "should update client" do
-    patch :update, id: @client, client: { billing_address: @client.billing_address, city: @client.city, first_name: @client.first_name, job_address: @client.job_address, last_name: @client.last_name, state: @client.state, zip: @client.zip }
+    patch :update, id: @client, client: { balance: @client.balance, billing_address: @client.billing_address, bush: @client.bush, city: @client.city, cut: @client.cut, fall: @client.fall, first_name: @client.first_name, job_address: @client.job_address, last_name: @client.last_name, mulch: @client.mulch, snow: @client.snow, spring: @client.spring, state: @client.state, zip: @client.zip }
     assert_redirected_to client_path(assigns(:client))
   end
 

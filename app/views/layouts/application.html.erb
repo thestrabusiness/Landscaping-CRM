@@ -3,7 +3,7 @@
 <head>
   <title>MoffaLandscaping</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'services', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -13,8 +13,8 @@
     <li><%= link_to "Login", root_path %></li>
     <li><%= link_to "Clients", clients_path %></li>
     <li><%= link_to "Invoices", invoices_path %></li>
-    <li><%= link_to "Services", services_path %></li>
-    </ul>
+    <li><%= link_to "Services", recurring_services_path %></li>
+  </ul>
   </div>
     
 <%= yield %>

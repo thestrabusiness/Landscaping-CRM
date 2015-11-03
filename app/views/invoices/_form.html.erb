@@ -13,15 +13,11 @@
 
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.date_select :date %>
   </div>
   <div class="field">
     <%= f.label :performed_by %><br>
     <%= f.text_field :performed_by %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
   </div>
   <div class="field">
     <%= f.label :note %><br>
@@ -31,6 +27,7 @@
     <%= f.label :client_id %><br>
     <%= f.text_field :client_id %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -35,35 +35,30 @@
   <%= @client.zip %>
 </p>
 
-<p>
-  <strong>Cut:</strong>
-  <%= @client.cut %>
-</p>
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><h4>Service</h4></th>
+          <th><h4>Price</h4></th>
+          <th><h4>Remove Service</h4></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recurring_prices.each do |item| %>
+        <tr>
+          <td><h4><%= item.name %></h4></td>
+          <td><h4><%= item.price/100 %></h4></td>
+          <td><h4><%= link_to "Delete", [@client, item], method: :delete, confirm: "Are you sure you want to remove this service from the customer?" %></h4></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<p>
-  <strong>Mulch:</strong>
-  <%= @client.mulch %>
-</p>
-
-<p>
-  <strong>Bushes:</strong>
-  <%= @client.bush %>
-</p>
-
-<p>
-  <strong>Spring clean-up:</strong>
-  <%= @client.spring %>
-</p>
-
-<p>
-  <strong>Fall clean-up:</strong>
-  <%= @client.fall %>
-</p>
-
-<p>
-  <strong>Snow Removal:</strong>
-  <%= @client.snow %>
-</p>
+<%= link_to "Add new recurring service", new_client_recurring_price_path(@client), class: 'pull-right' %>
 
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>

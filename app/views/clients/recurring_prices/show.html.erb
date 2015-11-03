@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @recurring_price.price %>
+</p>
+
+<p>
+  <strong>Clients:</strong>
+  <%= @recurring_price.clients %>
+</p>
+
+<p>
+  <strong>Recurring services:</strong>
+  <%= @recurring_price.recurring_services %>
+</p>
+
+<%= link_to 'Edit', edit_recurring_price_path(@recurring_price) %> |
+<%= link_to 'Back', recurring_prices_path %>

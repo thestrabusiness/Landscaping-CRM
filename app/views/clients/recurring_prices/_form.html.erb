@@ -1,0 +1,16 @@
+<%= form_for [@client, @recurring_price] do |f| %>
+
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+
+<div class="field">
+  <%= f.label :name %><br>
+  <% options = options_from_collection_for_select(@recurring_services, 'name', 'name') %>
+  <%= f.select :name, options %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
