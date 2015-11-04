@@ -8,7 +8,7 @@ class BuildDb < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zip
-      t.integer :balance
+      t.money :balance
 
       t.timestamps null: false
     end
@@ -18,7 +18,7 @@ class BuildDb < ActiveRecord::Migration
       t.string :performed_by
       t.string :status
       t.string :note
-      t.integer :total
+      t.money :total
       t.references :client, index: true
 
       t.timestamps null: false
@@ -28,7 +28,7 @@ class BuildDb < ActiveRecord::Migration
       t.string :name
       t.string :category
       t.integer :quantity
-      t.integer :price
+      t.money :price
       t.references :invoice, index: true, foreign_key: true
       
 
@@ -45,7 +45,7 @@ class BuildDb < ActiveRecord::Migration
 
     create_table :recurring_prices do |t|
       t.string :name
-      t.integer :price
+      t.money :price
       t.references :clients, index: true
 
       t.timestamps null: false
