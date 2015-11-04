@@ -49,7 +49,7 @@
         <% @recurring_prices.each do |item| %>
         <tr>
           <td><h4><%= item.name %></h4></td>
-          <td><h4><%= item.price/100 %></h4></td>
+          <td><h4><%= item.price %></h4></td>
           <td><h4><%= link_to "Delete", [@client, item], method: :delete, confirm: "Are you sure you want to remove this service from the customer?" %></h4></td>
         </tr>
         <% end %>

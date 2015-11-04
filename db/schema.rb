@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.integer  "balance"
+    t.money  "balance"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "performed_by"
     t.string   "status"
     t.string   "note"
-    t.integer  "total"
+    t.money  "total"
     t.integer  "client_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20151103004808) do
 
   create_table "recurring_prices", force: :cascade do |t|
     t.string   "name"
-    t.integer  "price"
+    t.money  "price"
     t.integer  "clients_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "name"
     t.string   "category"
     t.integer  "quantity"
-    t.integer  "price"
+    t.money  "price"
     t.integer  "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
