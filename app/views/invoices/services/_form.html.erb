@@ -1,14 +1,14 @@
 <%= form_for [@invoice, @service] do |f| %>
-<% javascript_include_tag "services" %>
 
   <div class="control-group">
     <%= f.label :name %>
     <div class="controls">
       <% options = options_from_collection_for_select(@recurring_prices, 'name', 'name') %>
-      <%= f.select :name, options, :prompt => 'Choose a service', :include_blank => 'Other', :id => 'service_name' %>      
+      <%= f.select :name, content_tag(:option,'Other',:value=>"other")+options, :prompt => 'Choose a service' %>      
     </div>
   </div>
-  <div class="control-group">
+
+  <div id="other_text_box" class="control-group">
     <div class="controls">
       <%= label_tag :other_service %><br>
       <%= text_field_tag :other_service_name %>      
@@ -33,7 +33,7 @@
     <%= f.label :quantity %><br>
     <%= f.number_field :quantity %>
   </div>
-  <div class="field">
+  <div id="other_price_box" class="field">
     <%= label_tag :price %><br>
     <%= number_field_tag :new_price %>
   </div>
@@ -41,3 +41,26 @@
     <%= f.submit %>  
   </div>
 <% end %>
+
+<script>
+$ ( document ).ready(function() {
+    $("#other_text_box").hide();
+    $("#other_price_box").hide();
+  
+    $('#service_name').on('change', function(ev) { 
+        var selected_item = $(ev.currentTarget).val();
+        console.log("Your select value is " + selected_item);
+        if ( selected_item == 'other' )
+        {
+          $("#other_text_box").show();
+          $("#other_price_box").show();
+        }
+        else
+        {
+          $("#other_text_box").hide();
+          $("#other_price_box").hide();
+        }
+    });
+  
+});
+</script>

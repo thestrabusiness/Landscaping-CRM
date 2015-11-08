@@ -1,41 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @client.first_name %>
-</p>
+<div style="width:50%; float:left;">
+  <p>
+    <strong>First name:</strong>
+    <%= @client.first_name %>
+  </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @client.last_name %>
-</p>
+  <p>
+    <strong>Last name:</strong>
+    <%= @client.last_name %>
+  </p>
 
-<p>
-  <strong>Billing address:</strong>
-  <%= @client.billing_address %>
-</p>
+  <p>
+    <strong>Billing address:</strong>
+    <%= @client.billing_address %>
+  </p>
 
-<p>
-  <strong>Job address:</strong>
-  <%= @client.job_address %>
-</p>
+  <p>
+    <strong>Job address:</strong>
+    <%= @client.job_address %>
+  </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @client.city %>
-</p>
+  <p>
+    <strong>City:</strong>
+    <%= @client.city %>
+  </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @client.state %>
-</p>
+  <p>
+    <strong>State:</strong>
+    <%= @client.state %>
+  </p>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @client.zip %>
-</p>
+  <p>
+    <strong>Zip:</strong>
+    <%= @client.zip %>
+  </p>
+</div>
 
-<div class="media">
+<div style="width:50%; height:inherit; float:right;">
+  <p>
+    <strong>Balance:</strong>
+    <%= number_to_currency(@client.balance) %>
+  </p>
+</div>
+
+<div class="media" style="clear:both;">
   <div class="media-body">
     <table class="table table-hover">
       <thead>
@@ -49,7 +58,7 @@
         <% @recurring_prices.each do |item| %>
         <tr>
           <td><h4><%= item.name %></h4></td>
-          <td><h4><%= item.price %></h4></td>
+          <td><h4><%= number_to_currency(item.price) %></h4></td>
           <td><h4><%= link_to "Delete", [@client, item], method: :delete, confirm: "Are you sure you want to remove this service from the customer?" %></h4></td>
         </tr>
         <% end %>
