@@ -13,6 +13,16 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
+    
+     respond_to do |format|
+      format.html { render :show }
+      format.pdf  do
+        pdf = PDFKit.new("http://127.0.0.1:8080/invoices/#{@invoice.id}" )
+        #pdf.to_file('public/test_save.pdf')
+        #redirect_to @invoice, notice: 'PDF generated in public/'
+        pdf.to_pdf
+      end
+    end
   end
 
   # GET /invoices/new
@@ -109,6 +119,20 @@ class InvoicesController < ApplicationController
       redirect_to @invoice
     end
   end
+  
+  def show_pdf
+    invoice_id = params[:id]
+    
+    path = invoice_path
+    filename = "invoice_#{invoice_id}"
+    
+    kit = PDFKit.new(path)
+    pdf = kit.to_pdf
+    send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
+    
+  end
+  
+    
   
   private
     # Use callbacks to share common setup or constraints between actions.

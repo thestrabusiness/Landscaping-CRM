@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       put :set_sent
       put :set_paid
+      get :show_pdf
     end
   end
     

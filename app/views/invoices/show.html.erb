@@ -69,6 +69,5 @@
 <div class='pull-right'> <%= button_to "Set Status to 'Sent'", set_sent_invoice_path(@invoice), method: :put %> <%= button_to "Set Status to Paid", set_paid_invoice_path(@invoice), method: :put %> </div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
-
-
+<%= link_to 'Back', invoices_path %> |
+<%= link_to "Generate PDF", invoice_path(@invoice, :format => 'pdf') %> 

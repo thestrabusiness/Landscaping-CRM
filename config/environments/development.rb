@@ -35,7 +35,9 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-
+  
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # config.action_controller.asset_host = "http://10.0.2.15:3000"
 end
