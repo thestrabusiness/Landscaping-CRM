@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoffaLandscaping</title>
+  <link rel="stylesheet" media="all" href="/assets/application.self-2390ace5c273ea606bbff168c043bc62947e39f045f08b1a9f11691cc7865227.css?body=1" data-turbolinks-track="true" />
+  <script src="/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/clients.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/invoices.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/recurring_prices.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/recurring_services.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/services.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="J/FGz6Z87UmTI8Z+WOX33fmILiwZ/pue+JWnACQw7jEXZ0TPL9Y7+6WUmTtCv2A/qAAfga3bhUelVPQHUgm+kQ==" />
+</head>
+<body>
+
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li><a href="/">Login</a></li>
+    <li><a href="/clients">Clients</a></li>
+    <li><a href="/invoices">Invoices</a></li>
+    <li><a href="/recurring_services">Services</a></li>
+  </ul>
+  </div>
+    
+<p id="notice"></p>
+
+<p>
+  <strong>Date:</strong>
+  11-08-15
+</p>
+
+<p>
+  <strong>Performed by:</strong>
+  Anthony
+</p>
+
+<p>
+  <strong>Status:</strong>
+  SENT
+</p>
+
+<p>
+  <strong>Note:</strong>
+  Testing JS
+</p>
+
+<p>
+  <strong>Client:</strong>
+  Anthony Moffa
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Total</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><h4>One time service</h4></td>
+            <td><h4>Maintenance</h4></td>
+            <td><h4>1</h4></td>
+            <td><h4>$300.00 </h4></td>
+            <td><h4>$300.00 </h4></td> 
+            <td><h4><a confirm="Are you sure you want to delete this service?" rel="nofollow" data-method="delete" href="/invoices/3/services/1">Delete</a></h4></td>
+          </tr>
+        <tr>
+            <td><h4>November Lawncare</h4></td>
+            <td><h4>Maintenance</h4></td>
+            <td><h4>1</h4></td>
+            <td><h4>$125.00 </h4></td>
+            <td><h4>$125.00 </h4></td> 
+            <td><h4><a confirm="Are you sure you want to delete this service?" rel="nofollow" data-method="delete" href="/invoices/3/services/2">Delete</a></h4></td>
+          </tr>
+        <tr>
+            <td><h4>Snow Removal</h4></td>
+            <td><h4>Maintenance</h4></td>
+            <td><h4>1</h4></td>
+            <td><h4>$75.00 </h4></td>
+            <td><h4>$75.00 </h4></td> 
+            <td><h4><a confirm="Are you sure you want to delete this service?" rel="nofollow" data-method="delete" href="/invoices/3/services/3">Delete</a></h4></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<a class="pull-right" href="/invoices/3/services/new">Add new item</a>
+
+<br>
+
+<h4 class='pull-right'> Invoice total: $500.00 </h4>
+
+<br><br>
+
+<div class='pull-right'> <form class="button_to" method="post" action="/invoices/3/set_sent"><input type="hidden" name="_method" value="put" /><input type="submit" value="Set Status to &#39;Sent&#39;" /><input type="hidden" name="authenticity_token" value="0+Kex6EOPtWBgpq/oirpfj45fifmcQsyVzmIlrr4lMrjdJzHKKToZ7c1xfq4cH6cb7FPilJUFesK+NuRzMHEag==" /></form> <form class="button_to" method="post" action="/invoices/3/set_paid"><input type="hidden" name="_method" value="put" /><input type="submit" value="Set Status to Paid" /><input type="hidden" name="authenticity_token" value="jt0LoSt1aFPy24b+mIy+CKsgXCnVEaiYGJ+Wk7Yw2l6+Swmhot++4cRs2buC1inq+qhthGE0tkFFXsWUwAmK/g==" /></form> </div>
+
+<a href="/invoices/3/edit">Edit</a> |
+<a href="/invoices">Back</a> |
+<a href="/invoices/3.pdf">Generate PDF</a> |
+<a href="/invoices/3/show_pdf">Generate PDF offline</a>
+
+
+</body>
+</html>

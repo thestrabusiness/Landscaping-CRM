@@ -70,4 +70,6 @@
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %> |
-<%= link_to "Generate PDF", invoice_path(@invoice, :format => 'pdf') %> 
+<%= link_to "Generate PDF", show_pdf_invoice_path(@invoice) %> |
+<%= link_to "Generate PDF respond_to method", invoice_url(@invoice, :format => 'pdf') %> |
+

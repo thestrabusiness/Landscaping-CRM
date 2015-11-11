@@ -8,7 +8,7 @@ gem 'pg'
 # pdfkit to generate client invoices from html of invoice views --REQUIRES WKHTMLTOPDF--
 gem 'pdfkit'
 # use unicorn because pdfkit hangs if you use webrick
-gem 'unicorn'
+# gem 'unicorn'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

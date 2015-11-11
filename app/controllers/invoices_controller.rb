@@ -14,15 +14,17 @@ class InvoicesController < ApplicationController
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
     
-     respond_to do |format|
-      format.html { render :show }
-      format.pdf  do
-        pdf = PDFKit.new("http://127.0.0.1:8080/invoices/#{@invoice.id}" )
-        #pdf.to_file('public/test_save.pdf')
-        #redirect_to @invoice, notice: 'PDF generated in public/'
-        pdf.to_pdf
-      end
-    end
+#     respond_to do |format|
+#      format.html { render :show }
+#      format.pdf  do
+#        path = invoice_url(@invoice)
+#        filename = "invoice_#{@invoice.id}"
+#        
+#        pdf = PDFKit.new(path)
+#        pdf.to_pdf
+#        
+#      end
+#    end
   end
 
   # GET /invoices/new
@@ -121,10 +123,14 @@ class InvoicesController < ApplicationController
   end
   
   def show_pdf
-    invoice_id = params[:id]
     
-    path = invoice_path
-    filename = "invoice_#{invoice_id}"
+    @invoice = Invoice.find(params[:id])
+    @services = @invoice.services
+    @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
+    
+    #pass view to PDFKIT, render pdf inline    
+    path = invoice_url(@invoice)
+    filename = "invoice_#{@invoice.id}"
     
     kit = PDFKit.new(path)
     pdf = kit.to_pdf
