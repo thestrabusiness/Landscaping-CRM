@@ -11,5 +11,7 @@ class Invoice < ActiveRecord::Base
   def show_pdf
   end
   
+  def generate_pdf
+  end
 end
 

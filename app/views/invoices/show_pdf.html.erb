@@ -1,4 +1,59 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <strong>Date:</strong>
+  <%= @invoice.date.strftime("%m-%d-%y") %>
+</p>
 
+<p>
+  <strong>Performed by:</strong>
+  <%= @invoice.performed_by %>
+</p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @invoice.status %>
+</p>
 
+<p>
+  <strong>Note:</strong>
+  <%= @invoice.note %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @invoice.client.first_name %> <%= @invoice.client.last_name %>
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @services.each do |service| %>
+        <tr>
+          <% if service.name.downcase == 'cut' %>
+            <td><h4><%= @invoice.date.strftime( "%B" ) %> Lawncare</h4></td>
+            <% else %>
+            <td><h4><%= service.name %></h4></td>
+            <%end %>            
+            <td><h4><%= service.category  %></h4></td>
+            <td><h4><%= service.quantity %></h4></td>
+            <td><h4><%= number_to_currency(service.price) %> </h4></td>
+            <td><h4><%= number_to_currency(service.price * service.quantity) %> </h4></td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<h4 class='pull-right'> Invoice total: <%= number_to_currency(@invoice.total) %> </h4>

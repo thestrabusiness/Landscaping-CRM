@@ -14,17 +14,18 @@ class InvoicesController < ApplicationController
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
     
-#     respond_to do |format|
-#      format.html { render :show }
-#      format.pdf  do
-#        path = invoice_url(@invoice)
-#        filename = "invoice_#{@invoice.id}"
-#        
-#        pdf = PDFKit.new(path)
-#        pdf.to_pdf
-#        
-#      end
-#    end
+     respond_to do |format|
+      format.html { render :show }
+      format.pdf  do
+        path = show_pdf_invoice_url(@invoice)
+        filename = "invoice_#{@invoice.id}"
+        
+        pdf = PDFKit.new(path)
+        pdf.to_pdf
+        send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
+        
+      end
+    end
   end
 
   # GET /invoices/new
@@ -122,22 +123,26 @@ class InvoicesController < ApplicationController
     end
   end
   
-  def show_pdf
-    
+  def show_pdf    
     @invoice = Invoice.find(params[:id])
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
     
-    #pass view to PDFKIT, render pdf inline    
-    path = invoice_url(@invoice)
+    render :layout => 'pdf_layout'
+  end
+  
+  def generate_pdf
+    @invoice = Invoice.find(params[:id])
+    path = show_pdf_invoice_url(@invoice)
+#    template = render_to_string(:template => "/invoices/pdf.html.erb", :layout => true)
     filename = "invoice_#{@invoice.id}"
     
     kit = PDFKit.new(path)
     pdf = kit.to_pdf
+#    kit.stylesheets << 'public/pdf.css'
     send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
-    
   end
-  
+    
     
   
   private
