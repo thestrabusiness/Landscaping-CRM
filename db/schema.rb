@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "job_address"
     t.string   "city"
     t.string   "state"
-    t.string   "zip"
+    t.string(5)   "zip"
     t.money  "balance"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -42,14 +42,12 @@ ActiveRecord::Schema.define(version: 20151103004808) do
   create_table "recurring_prices", force: :cascade do |t|
     t.string   "name"
     t.money  "price"
-    t.integer  "clients_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "client_id"
   end
 
   add_index "recurring_prices", ["client_id"], name: "index_recurring_prices_on_client_id"
-  add_index "recurring_prices", ["clients_id"], name: "index_recurring_prices_on_clients_id"
 
   create_table "recurring_services", force: :cascade do |t|
     t.string   "name"

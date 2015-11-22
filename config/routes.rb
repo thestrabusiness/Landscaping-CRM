@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :show_pdf
       get :generate_pdf
     end
+    collection { get :generate_multiple_pdfs }
   end
     
   resources :clients do

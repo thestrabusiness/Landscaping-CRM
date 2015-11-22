@@ -1,10 +1,12 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @search = InvoiceSearch.new(params[:search])
+    @invoices = @search.scope.order(sort_column + " " + sort_direction)
   end
 
   # GET /invoices/1
@@ -14,18 +16,6 @@ class InvoicesController < ApplicationController
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
     
-     respond_to do |format|
-      format.html { render :show }
-      format.pdf  do
-        path = show_pdf_invoice_url(@invoice)
-        filename = "invoice_#{@invoice.id}"
-        
-        pdf = PDFKit.new(path)
-        pdf.to_pdf
-        send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
-        
-      end
-    end
   end
 
   # GET /invoices/new
@@ -134,19 +124,56 @@ class InvoicesController < ApplicationController
   def generate_pdf
     @invoice = Invoice.find(params[:id])
     path = show_pdf_invoice_url(@invoice)
-#    template = render_to_string(:template => "/invoices/pdf.html.erb", :layout => true)
     filename = "invoice_#{@invoice.id}"
     
     kit = PDFKit.new(path)
     pdf = kit.to_pdf
-#    kit.stylesheets << 'public/pdf.css'
     send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
   end
+  
+  def generate_multiple_pdfs
+    #generate pdfs from selected invoices and save each to file
+    @invoices = Invoice.find(params[:selected_invoices])
+    files = []
+    @invoices.each do |invoice|
+      path = show_pdf_invoice_url(invoice)
+      filename = "invoice_#{invoice.id}.pdf"
+      files.push filename    
+      
+      kit = PDFKit.new(path)
+      pdf = kit.to_file("#{Rails.root}/public/invoices/#{filename}")
+    end
     
+    #Combine generated PDFs into single file
+    pdf_pack = CombinePDF.new
+    files.each do |file|
+      pdf_pack << CombinePDF.load("#{Rails.root}/public/invoices/#{file}")
+    end
+    pack_filename = "invoices_#{Date.today.to_formatted_s(:iso8601)}.pdf"
+    pdf_pack.save "#{Rails.root}/public/invoices/#{pack_filename}"
     
+    send_file("#{Rails.root}/public/invoices/#{pack_filename}", :type => 'application/pdf', :disposition => 'inline')
+
+#    files.each do |file|
+#      File.delete("#{Rails.root}/public/invoices/#{file}")
+#    end
+    
+#    flash[:notice] = "Invoices saved to public/invoices"
+#    redirect_to invoices_url
+  end
+      
   
   private
     # Use callbacks to share common setup or constraints between actions.
+    def sort_column
+      params[:sort] || "date"
+    end
+
+    def sort_direction
+      params[:direction] || "desc"
+    end
+
+
     def set_invoice
       @invoice = Invoice.find(params[:id])
     end

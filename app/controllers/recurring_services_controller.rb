@@ -54,11 +54,11 @@ class RecurringServicesController < ApplicationController
   # DELETE /recurring_services/1
   # DELETE /recurring_services/1.json
   def destroy
-    @recurring_price = RecurringPrice.where(:recurring_services_id => :id)
+    @recurring_price = RecurringPrice.where(:name => :name)
     @recurring_service = RecurringService.find(params[:id])
     
     if @recurring_service.destroy
-      flash[:notice] = "#{title} was deleted succesfully."
+      flash[:notice] = "#{@recurring_service.name} was deleted succesfully."
       redirect_to @recurring_prices
     else
       flash[:error] = "There was an error deleting the service."

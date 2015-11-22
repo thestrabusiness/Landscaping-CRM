@@ -9,6 +9,8 @@ gem 'pg'
 gem 'pdfkit'
 # use unicorn because pdfkit hangs if you use webrick
 gem 'unicorn'
+# use combine_pdf to combine generated pdfs into single file for easier handling
+gem 'combine_pdf'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

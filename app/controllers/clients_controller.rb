@@ -1,10 +1,10 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.order(sort_column + " " + sort_direction)
     
   respond_to do |format|
       format.html
@@ -81,6 +81,14 @@ class ClientsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def sort_column
+      params[:sort] || "id"
+    end
+
+    def sort_direction
+      params[:direction] || "asc"
+    end    
+
     def set_client
       @client = Client.find(params[:id])
     end
