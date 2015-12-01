@@ -1,59 +1,78 @@
-<p>
-  <strong>Date:</strong>
-  <%= @invoice.date.strftime("%m-%d-%y") %>
-</p>
-
-<p>
-  <strong>Performed by:</strong>
-  <%= @invoice.performed_by %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @invoice.status %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @invoice.note %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @invoice.client.first_name %> <%= @invoice.client.last_name %>
-</p>
-
-<div class="media">
-  <div class="media-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th>Category</th>
-          <th>Quantity</th>
-          <th>Cost</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @services.each do |service| %>
-        <tr>
-          <% if service.name.downcase == 'cut' %>
-            <td><h4><%= @invoice.date.strftime( "%B" ) %> Lawncare</h4></td>
-            <% else %>
-            <td><h4><%= service.name %></h4></td>
-            <%end %>            
-            <td><h4><%= service.category  %></h4></td>
-            <td><h4><%= service.quantity %></h4></td>
-            <td><h4><%= number_to_currency(service.price) %> </h4></td>
-            <td><h4><%= number_to_currency(service.price * service.quantity) %> </h4></td> 
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div >
+  <div>
+    <p>
+      <h2> <u>Moffa Landscaping</u>
+        </h2>
+      1647 Northshore Road<br>
+      Revere, MA 02151
+      </p>
   </div>
+  <br>
+  <h3> 
+    Invoice
+    </h3>
+  <br>
+  <div class="pull-left" style="width:33%">
+    <p> 
+      <%= @invoice.client.first_name %> <%= @invoice.client.last_name %> <br>
+      <%= @invoice.client.billing_address %> <br>
+      <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= @invoice.client.zip %>   
+      </p>
+    </div>
+
+  <div class="pull-right" style="width:33%">
+    <p> 
+      <strong>Invoice number:</strong> <%= @invoice.id %> <br>
+      <strong>Invoice date:</strong> <%= @invoice.date.strftime("%m-%d-%y") %> <br>
+      <strong>Payment due by:</strong> #DATE HERE   
+      </p>
+    </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div>
+    <p>
+      <strong>Notes:</strong>
+      <%= @invoice.note %>
+      </p>
+    <br>
+    <div class="panel panel-default" >
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Cost</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @services.each do |service| %>
+            <tr>
+              <% if service.name.downcase == 'cut' %>
+                <td><h4><%= @invoice.date.strftime( "%B" ) %> Lawncare</h4></td>
+                <% else %>
+                <td><h4><%= service.name %></h4></td>
+                <%end %>            
+                <td><h4><%= service.category  %></h4></td>
+                <td><h4><%= service.quantity %></h4></td>
+                <td><h4><%= number_to_currency(service.price) %> </h4></td>
+                <td><h4><%= number_to_currency(service.price * service.quantity) %> </h4></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br>
+        <h4 class='pull-right'> <strong>Invoice total:</strong> <%= number_to_currency(@invoice.total) %> </h4>
+      </div>
+    </div>
+  </div>
+  
+  <br>
+
+  
 </div>
-
-<br>
-
-<h4 class='pull-right'> Invoice total: <%= number_to_currency(@invoice.total) %> </h4>
