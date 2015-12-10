@@ -84,12 +84,7 @@ class InvoicesController < ApplicationController
         end
     else    
       @invoice.update_attribute :status, "SENT"
-
-      @client = @invoice.client
-      @client.update_attribute :balance, @client.balance + @invoice.total
-
-      flash[:notice] = "Invoice marked as SENT, client balance updated!"
-
+      flash[:notice] = "Invoice marked as SENT!"
       redirect_to @invoice
     end
   end
@@ -104,10 +99,6 @@ class InvoicesController < ApplicationController
         end
     else    
       @invoice.update_attribute :status, "PAID"
-    
-      @client = @invoice.client
-      @client.update_attribute :balance, @client.balance - @invoice.total
-      
       flash[:notice] = "Invoice marked PAID!"    
       redirect_to @invoice
     end

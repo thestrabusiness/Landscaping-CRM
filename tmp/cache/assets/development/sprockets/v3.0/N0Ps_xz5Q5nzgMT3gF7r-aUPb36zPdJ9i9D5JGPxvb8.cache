@@ -1,0 +1,7 @@
+I"N(function() {
+  $(function() {});
+
+  $('#other').hide();
+
+}).call(this);
+:ET

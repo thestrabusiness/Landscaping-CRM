@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  resources :payments
   resources :recurring_services
   
   resources :clients do

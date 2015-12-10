@@ -1,0 +1,12 @@
+I"ï(function() {
+  jQuery(function() {
+    ($('#other')).hide();
+    return ($('#serivce_name')).change(function() {
+      if ($('#service_name').val() === "Other") {
+        return ($('#other')).show();
+      }
+    });
+  });
+
+}).call(this);
+:ET

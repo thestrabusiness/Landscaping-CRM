@@ -1,0 +1,17 @@
+I"p(function() {
+  jQuery(function() {
+    $('#other').hide();
+    return $('#serivce_name').on('change', function() {
+      var name;
+      alert('Hello from your onChange handler');
+      name = $('#service_name').val();
+      if (name === "") {
+        return $('#other').show();
+      } else {
+        return $('#other').hide();
+      }
+    });
+  });
+
+}).call(this);
+:ET

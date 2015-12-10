@@ -1,0 +1,21 @@
+I"n(function() {
+  var ready;
+
+  ready = function() {
+    return $('#other').hide();
+  };
+
+  ($('select#service_name')).change()(function() {
+    var name;
+    name = ($('select#service_name :selected')).text();
+    if (name === "other") {
+      return $('#other').show();
+    }
+  });
+
+  $(document).ready(ready);
+
+  $(document).on('page:load', ready);
+
+}).call(this);
+:ET

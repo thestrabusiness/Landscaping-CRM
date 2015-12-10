@@ -40,8 +40,8 @@ class Invoices::ServicesController < ApplicationController
     @service = Service.new(service_params)
     @service.invoice = @invoice
     
-    @client = @invoice.client.id
-    @service.client_id = @client
+    @client = Client.find(@invoice.client.id)
+    @service.client_id = @client.id
   
     unless params[:other_service_name].empty? 
       @service.name = params[:other_service_name]
@@ -49,11 +49,14 @@ class Invoices::ServicesController < ApplicationController
     
     unless params[:new_price].empty?
       @service.price = params[:new_price]
-      @invoice.update_attribute :total,  @invoice.total + (@service.price * @service.quantity) 
+      @invoice.update_attribute :total,  @invoice.total + (@service.price * @service.quantity)
+      @client.update_attribute :balance, (@client.balance + (@service.price * @service.quantity))
     else
       @recurring_price = RecurringPrice.find_by name: @service.name, client_id: @service.client_id 
       @service.price = @recurring_price.price
-      @invoice.update_attribute :total,  @invoice.total + (@service.price * @service.quantity) 
+      @invoice.update_attribute :total,  @invoice.total + (@service.price * @service.quantity)
+      @client.update_attribute :balance, (@client.balance + (@service.price * @service.quantity))
+      
     end
       
       
@@ -85,12 +88,16 @@ class Invoices::ServicesController < ApplicationController
 
   # DELETE /services/1
   # DELETE /services/1.json
-  def destroy
+def destroy
     @invoice = Invoice.find(params[:invoice_id])
+    
+  if @invoice.status == "PENDING"
     @service = Service.find(params[:id])
+    @client = Client.find(@invoice.client.id)
     title = @service.name
     
     @invoice.update_attribute :total,  @invoice.total - (@service.price * @service.quantity)
+    @client.update_attribute :balance, (@client.balance - (@service.price * @service.quantity))
     
     if @service.destroy
       flash[:notice] = "#{title} was deleted succesfully."
@@ -99,8 +106,15 @@ class Invoices::ServicesController < ApplicationController
       flash[:error] = "There was an error deleting the service."
       render :show
     end
+  else
+    respond_to do |format|
+      format.html { redirect_to @invoice, notice: "You can no longer modify this invoice!" }
+      format.json { head :no_content }
+    end
   end
-
+    
+end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service

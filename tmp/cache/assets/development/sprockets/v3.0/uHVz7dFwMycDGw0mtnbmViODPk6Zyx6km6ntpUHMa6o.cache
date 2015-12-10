@@ -1,0 +1,16 @@
+I"?(function() {
+  jQuery(function() {
+    $('#other').hide();
+    return $('#serivce_name').on('change', function() {
+      var name;
+      name = $('#service_name').val();
+      if (name === "") {
+        return $('#other').show();
+      } else {
+        return $('#other').hide();
+      }
+    });
+  });
+
+}).call(this);
+:ET

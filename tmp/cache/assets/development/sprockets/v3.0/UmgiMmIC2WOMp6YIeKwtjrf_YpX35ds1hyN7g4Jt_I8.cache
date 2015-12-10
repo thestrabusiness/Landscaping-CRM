@@ -1,0 +1,13 @@
+I"$(function() {
+  jQuery(function() {
+    var name;
+    ($('#service name')).hide();
+    ($('select#serivce_name')).change(function() {});
+    name = ($('select#name option :selected')).text();
+    if (name === "Other") {
+      return ($('text_field#name')).show();
+    }
+  });
+
+}).call(this);
+:ET

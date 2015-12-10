@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103004808) do
+ActiveRecord::Schema.define(version: 20151209011938) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string   "first_name"
@@ -20,10 +23,11 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "job_address"
     t.string   "city"
     t.string   "state"
-    t.string(5)   "zip"
-    t.money  "balance"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "zip",             limit: 5
+    t.money    "balance",                   scale: 2
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "phone_number"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -31,23 +35,36 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "performed_by"
     t.string   "status"
     t.string   "note"
-    t.money  "total"
+    t.money    "total",        scale: 2
     t.integer  "client_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"
+  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.date     "date"
+    t.money    "amount",       scale: 2
+    t.string   "payment_type"
+    t.integer  "invoice_id"
+    t.integer  "client_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "payments", ["client_id"], name: "index_payments_on_client_id", using: :btree
+  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
 
   create_table "recurring_prices", force: :cascade do |t|
     t.string   "name"
-    t.money  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.money    "price",      scale: 2
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "client_id"
   end
 
-  add_index "recurring_prices", ["client_id"], name: "index_recurring_prices_on_client_id"
+  add_index "recurring_prices", ["client_id"], name: "index_recurring_prices_on_client_id", using: :btree
 
   create_table "recurring_services", force: :cascade do |t|
     t.string   "name"
@@ -59,14 +76,16 @@ ActiveRecord::Schema.define(version: 20151103004808) do
     t.string   "name"
     t.string   "category"
     t.integer  "quantity"
-    t.money  "price"
+    t.money    "price",      scale: 2
     t.integer  "invoice_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "client_id"
   end
 
-  add_index "services", ["client_id"], name: "index_services_on_client_id"
-  add_index "services", ["invoice_id"], name: "index_services_on_invoice_id"
+  add_index "services", ["client_id"], name: "index_services_on_client_id", using: :btree
+  add_index "services", ["invoice_id"], name: "index_services_on_invoice_id", using: :btree
 
+  add_foreign_key "payments", "clients"
+  add_foreign_key "payments", "invoices"
 end

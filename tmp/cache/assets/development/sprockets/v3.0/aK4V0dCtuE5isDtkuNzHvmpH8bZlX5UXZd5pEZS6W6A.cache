@@ -1,0 +1,14 @@
+I"â(function() {
+  var ready;
+
+  ready = function() {
+    $('#other').hide();
+    return $('#service_name').attr('disabled', 'disabled')();
+  };
+
+  $(document).ready(ready);
+
+  $(document).on('page:load', ready);
+
+}).call(this);
+:ET

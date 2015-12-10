@@ -1,0 +1,13 @@
+I"û(function() {
+  ($('text_field#name')).hide();
+
+  ($('select#name')).change(function() {
+    var name;
+    name = ($('select#name :selected')).text();
+    if (name === 'Other') {
+      return ($('text_field#name')).show();
+    }
+  });
+
+}).call(this);
+:ET
