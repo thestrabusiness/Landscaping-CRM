@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-12-14 19:36:34
+  total: 
+  notes: MyString
+  client_id: 
+
+two:
+  date: 2015-12-14 19:36:34
+  total: 
+  notes: MyString
+  client_id: 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209011938) do
+ActiveRecord::Schema.define(version: 20151215005256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,28 @@ ActiveRecord::Schema.define(version: 20151209011938) do
     t.datetime "updated_at",                          null: false
     t.string   "phone_number"
   end
+
+  create_table "estimate_items", force: :cascade do |t|
+    t.integer  "estimate_id"
+    t.string   "name"
+    t.money    "price",       scale: 2
+    t.integer  "quantity"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "estimate_items", ["estimate_id"], name: "index_estimate_items_on_estimate_id", using: :btree
+
+  create_table "estimates", force: :cascade do |t|
+    t.datetime "date"
+    t.money    "total",      scale: 2
+    t.string   "notes"
+    t.integer  "client_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "estimates", ["client_id"], name: "index_estimates_on_client_id", using: :btree
 
   create_table "invoices", force: :cascade do |t|
     t.datetime "date"
@@ -86,6 +108,8 @@ ActiveRecord::Schema.define(version: 20151209011938) do
   add_index "services", ["client_id"], name: "index_services_on_client_id", using: :btree
   add_index "services", ["invoice_id"], name: "index_services_on_invoice_id", using: :btree
 
+  add_foreign_key "estimate_items", "estimates"
+  add_foreign_key "estimates", "clients"
   add_foreign_key "payments", "clients"
   add_foreign_key "payments", "invoices"
 end

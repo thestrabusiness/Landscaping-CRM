@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estimate:</strong>
+  <%= @estimate_item.estimate %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @estimate_item.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @estimate_item.price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @estimate_item.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_estimate_item_path(@estimate_item) %> |
+<%= link_to 'Back', estimate_items_path %>

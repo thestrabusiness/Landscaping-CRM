@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estimate_id: 
+  name: MyString
+  price: 
+  quantity: 1
+
+two:
+  estimate_id: 
+  name: MyString
+  price: 
+  quantity: 1

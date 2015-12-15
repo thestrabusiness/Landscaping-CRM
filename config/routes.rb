@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
   
+  resources :estimates do
+    resources :estimate_items, except: [:index], controller: 'estimates/estimate_items_controller'
+  end
+  
   resources :payments
   resources :recurring_services
   
