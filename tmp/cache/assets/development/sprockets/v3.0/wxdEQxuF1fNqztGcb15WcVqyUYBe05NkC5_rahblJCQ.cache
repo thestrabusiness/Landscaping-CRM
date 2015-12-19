@@ -1,5 +1,0 @@
-I"9(function() {
-  $('#other').hide();
-
-}).call(this);
-:ET

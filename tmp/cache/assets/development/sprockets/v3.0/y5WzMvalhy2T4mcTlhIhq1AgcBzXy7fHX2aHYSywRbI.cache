@@ -1,13 +1,0 @@
-I"(function() {
-  jQuery(function() {
-    var name;
-    ($('text_field#name')).hide();
-    ($('select#name')).change(function() {});
-    name = ($('select#name option :selected')).text();
-    if (name === "Other") {
-      return ($('text_field#name')).show();
-    }
-  });
-
-}).call(this);
-:ET
