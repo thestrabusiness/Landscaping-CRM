@@ -2,7 +2,7 @@
 
 <h1>Listing Clients</h1>
 <br>
-<%= form_tag(clients_path, :method => "get", id: "search-form") do %>
+<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Clients" %>
   <%= submit_tag "Search" %>
 <% end %>

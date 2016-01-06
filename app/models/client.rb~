@@ -12,7 +12,7 @@ class Client < ActiveRecord::Base
 #      end
 #    else
       where("first_name LIKE ? OR last_name LIKE ?", "%#{search}%", "%#{search}%")
-#    end
+    end
   end
 
   def self.import(file)

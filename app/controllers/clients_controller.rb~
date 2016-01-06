@@ -8,8 +8,7 @@ class ClientsController < ApplicationController
     if params[:search]
       @clients = Client.search(params[:search]).order(sort_column + " " + sort_direction)
     else
-      @clients.order(sort_column + " " + sort_direction)
-    end
+     @clients.order(sort_column + " " + sort_direction)
     
   respond_to do |format|
       format.html
