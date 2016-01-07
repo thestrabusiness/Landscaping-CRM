@@ -6,13 +6,7 @@ class Client < ActiveRecord::Base
   has_many :recurring_services, through: :recurring_prices
   
   def self.search(search)
-#    if search.match(" ")
-#      search.split.each do |search|
-#        where("first_name LIKE ? OR last_name LIKE ?", "%#{search}%", "%#{search}%")
-#      end
-#    else
-      where("first_name LIKE ? OR last_name LIKE ?", "%#{search}%", "%#{search}%")
-#    end
+    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def self.import(file)
