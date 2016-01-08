@@ -17,6 +17,8 @@ gem 'pdfkit'  # pdfkit to generate client invoices from html of invoice views --
 gem 'unicorn' # use unicorn because pdfkit hangs if you use webrick
 gem 'combine_pdf' # use combine_pdf to combine generated pdfs into single file for easier handling
 gem 'schema_to_scaffold' # Copy existing database schema to schema.rb file and generate scaffolds for all relevant controllers
+gem 'sunspot_rails' # sunspot search
+gem 'sunspot_solr' #solr distribution for sunspot
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

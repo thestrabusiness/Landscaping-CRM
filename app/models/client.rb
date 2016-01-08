@@ -5,9 +5,18 @@ class Client < ActiveRecord::Base
   has_many :recurring_prices, dependent: :destroy
   has_many :recurring_services, through: :recurring_prices
   
-  def self.search(search)
-    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+  searchable do
+    text :first_name
+    text :last_name
+    text :job_address
+    text :billing_address
+    text :city
   end
+    
+  
+#  def self.search(search)
+#    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+ # end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
