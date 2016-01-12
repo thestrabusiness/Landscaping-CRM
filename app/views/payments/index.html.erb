@@ -27,9 +27,9 @@
         <td><%= payment.payment_type %></td>
         <td><%= payment.invoice.id %></td>
         <td><%= payment.client.first_name %> <%= payment.client.last_name  %></td>
-        <td><%= link_to 'Show', payment %></td>
-        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-        <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', payment, class: 'btn btn-mini btn-default' %></td>
+        <td><%= link_to 'Edit', edit_payment_path(payment), class: 'btn btn-mini btn-success' %></td>
+        <td><%= link_to 'Destroy', payment, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -37,3 +37,7 @@
 
   </div>
 </div>
+
+
+
+
