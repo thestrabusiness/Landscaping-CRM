@@ -144,13 +144,7 @@ class InvoicesController < ApplicationController
     pdf_pack.save "#{Rails.root}/public/invoices/#{pack_filename}"
     
     send_file("#{Rails.root}/public/invoices/#{pack_filename}", :type => 'application/pdf', :disposition => 'inline')
-
-#    files.each do |file|
-#      File.delete("#{Rails.root}/public/invoices/#{file}")
-#    end
-    
-#    flash[:notice] = "Invoices saved to public/invoices"
-#    redirect_to invoices_url
+  
   end
       
   
@@ -171,6 +165,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :performed_by, :status, :note, :client_id)
+      params.require(:invoice).permit(:date, :performed_by, :status, :note, :client_id, :client_lastname)
     end
 end

@@ -25,7 +25,8 @@
   </div>
   <div class="field">
     <%= f.label :client_last_name %><br>
-    <%= f.text_field :client_last_name %>
+    <%= f.text_field :client_lastname, data: {autocomplete_source: Client.all.order(:last_name).map{ |m| "#{m.last_name}, #{m.first_name}"}} %>
+    <%= f.hidden_field :client_id %>
   </div>
 <div class="field">
     <%= f.label :status %><br>

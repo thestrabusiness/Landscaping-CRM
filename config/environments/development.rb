@@ -40,4 +40,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   # config.action_controller.asset_host = "http://10.0.2.15:3000"
+  
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get(
+    ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG'
+  )
+  
 end
