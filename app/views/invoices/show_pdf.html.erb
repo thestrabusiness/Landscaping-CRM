@@ -24,7 +24,7 @@
     <p> 
       <strong>Invoice number:</strong> <%= @invoice.id %> <br>
       <strong>Invoice date:</strong> <%= @invoice.date.strftime("%m-%d-%y") %> <br>
-      <strong>Payment due by:</strong> #DATE HERE   
+      <strong>Payment due by:</strong> <%= (@invoice.date + (30*24*60*60)).strftime("%m-%d-%y") %>
       </p>
     </div>
   <br>
@@ -67,7 +67,13 @@
           </tbody>
         </table>
         <br>
-        <h4 class='pull-right'> <strong>Invoice total:</strong> <%= number_to_currency(@invoice.total) %> </h4>
+        <h4 class='pull-right' align='right'>
+          <strong>Invoice subtotal:</strong> <%= number_to_currency(@invoice.total) %>
+          <br>
+          <strong>Balance forward:</strong> <%= number_to_currency(balance_forward) %>
+          <br>
+          <strong>Amount due:</strong> <%= number_to_currency(@invoice.total + balance_forward) %>
+        </h4>
       </div>
     </div>
   </div>

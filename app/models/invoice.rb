@@ -17,7 +17,7 @@ class Invoice < ActiveRecord::Base
   def client_id=(lastname)
     self.client = Client.where(:last_name => lastname) if lastname.present?
   end
-  
+      
   def set_sent
   end
   

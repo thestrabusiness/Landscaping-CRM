@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :balance_forward
 
   # GET /invoices
   # GET /invoices.json
@@ -146,7 +146,14 @@ class InvoicesController < ApplicationController
     send_file("#{Rails.root}/public/invoices/#{pack_filename}", :type => 'application/pdf', :disposition => 'inline')
   
   end
-      
+  
+  def balance_forward
+    if @invoice.client.balance == 0
+      0
+    else
+      (@invoice.client.balance - @invoice.total)
+    end
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.
