@@ -13,10 +13,9 @@ class Client < ActiveRecord::Base
     text :city
   end
     
-  
-#  def self.search(search)
-#    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
- # end
+  def client_summary
+    [first_name, last_name, job_address].each{|e| e.to_s.strip!}.join(', ')
+  end    
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
@@ -32,5 +31,9 @@ class Client < ActiveRecord::Base
       end
     end
   end
+  
+  #  def self.search(search)
+#    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+ # end
   
   end

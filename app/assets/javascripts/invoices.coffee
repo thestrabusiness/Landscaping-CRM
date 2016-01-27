@@ -3,5 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $('#invoice_client_lastname').autocomplete
-    source: $('#invoice_client_lastname').data('autocomplete-source')
+  $('#invoice_client_name').autocomplete
+    source: $('#invoice_client_name').data('autocomplete-source')
+    select: (event, ui) ->
+      $( "#invoice_client_name" ).val( ui.item.label );
+      $( "#invoice_client_id" ).val( ui.item.id );

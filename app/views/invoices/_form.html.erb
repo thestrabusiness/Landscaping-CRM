@@ -24,8 +24,8 @@
     <%= f.text_field :note %>
   </div>
   <div class="field">
-    <%= f.label :client_last_name %><br>
-    <%= f.text_field :client_lastname, data: {autocomplete_source: Client.all.order(:last_name).map{ |m| "#{m.last_name}, #{m.first_name}"}} %>
+    <%= f.label :client %><br>
+    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}} %>
     <%= f.hidden_field :client_id %>
   </div>
 <div class="field">

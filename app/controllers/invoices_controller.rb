@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction, :balance_forward
+  helper_method :sort_column, :sort_direction
 
   # GET /invoices
   # GET /invoices.json
@@ -15,7 +15,6 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @services = @invoice.services
     @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
-    
   end
 
   # GET /invoices/new
