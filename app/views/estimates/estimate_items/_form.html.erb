@@ -1,22 +1,7 @@
-<%= form_for(@estimate_item) do |f| %>
-  <% if @estimate_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@estimate_item.errors.count, "error") %> prohibited this estimate_item from being saved:</h2>
-
-      <ul>
-      <% @estimate_item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for [@estimate, @estimate_item] do |f| %>
 
   <div class="field">
-    <%= f.label :estimate_id %><br>
-    <%= f.text_field :estimate_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :item %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">

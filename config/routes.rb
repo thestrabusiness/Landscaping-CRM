@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   
   resources :estimates do
-    resources :estimate_items, except: [:index], controller: 'estimates/estimate_items_controller'
+    resources :estimate_items, except: [:index], controller: 'estimates/estimate_items'
   end
   
   resources :payments

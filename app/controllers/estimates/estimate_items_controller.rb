@@ -1,6 +1,4 @@
-class EstimateItemsController < ApplicationController
-  before_action :set_estimate_item, only: [:show, :edit, :update, :destroy]
-
+class Estimates::EstimateItemsController < ApplicationController
   # GET /estimate_items
   # GET /estimate_items.json
   def index
@@ -14,6 +12,7 @@ class EstimateItemsController < ApplicationController
 
   # GET /estimate_items/new
   def new
+    @estimate = Estimate.find(params[:estimate_id])
     @estimate_item = EstimateItem.new
   end
 
@@ -24,15 +23,19 @@ class EstimateItemsController < ApplicationController
   # POST /estimate_items
   # POST /estimate_items.json
   def create
+    @estimate = Estimate.find(params[:estimate_id])
     @estimate_item = EstimateItem.new(estimate_item_params)
+    @estimate_item.estimate = @estimate
+    
+    @estimate.update_attribute :total, @estimate.total + (@estimate_item.price * @estimate_item.quantity)
 
     respond_to do |format|
       if @estimate_item.save
-        format.html { redirect_to @estimate_item, notice: 'Estimate item was successfully created.' }
-        format.json { render :show, status: :created, location: @estimate_item }
+        format.html { redirect_to @estimate, notice: 'Estimate item was successfully created.' }
+        format.json { render :show, status: :created, location: @estimate }
       else
         format.html { render :new }
-        format.json { render json: @estimate_item.errors, status: :unprocessable_entity }
+        format.json { render json: @estimate.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,10 +57,17 @@ class EstimateItemsController < ApplicationController
   # DELETE /estimate_items/1
   # DELETE /estimate_items/1.json
   def destroy
-    @estimate_item.destroy
-    respond_to do |format|
-      format.html { redirect_to estimate_items_url, notice: 'Estimate item was successfully destroyed.' }
-      format.json { head :no_content }
+    @estimate = Estimate.find(params[:estimate_id])
+    @estimate_item = EstimateItem.find(params[:id])
+    
+    @estimate.update_attribute :total, @estimate.total - (@estimate_item.price * @estimate_item.quantity)
+    
+    if @estimate_item.destroy
+      flash[:notice] = "#{@estimate_item.name} was deleted succesfully."
+      redirect_to @estimate
+    else
+      flash[:error] = "There was an error deleting the item."
+      render :show
     end
   end
 

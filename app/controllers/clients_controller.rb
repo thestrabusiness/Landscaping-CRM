@@ -6,6 +6,7 @@ class ClientsController < ApplicationController
   def index
     @search = Client.search do
       fulltext params[:search]
+      order_by(:last_name, :asc)
     end
     @clients = @search.results
       
@@ -106,6 +107,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:first_name, :last_name, :billing_address, :job_address, :city, :state, :zip, :cut, :bush, :mulch, :spring, :fall, :snow)
+      params.require(:client).permit(:first_name, :last_name, :billing_address, :job_address, :city, :state, :zip)
     end
 end

@@ -11,6 +11,8 @@ class Client < ActiveRecord::Base
     text :job_address
     text :billing_address
     text :city
+    string :first_name
+    string :last_name
   end
     
   def client_summary
@@ -31,9 +33,5 @@ class Client < ActiveRecord::Base
       end
     end
   end
-  
-  #  def self.search(search)
-#    where("first_name ILIKE ? OR last_name ILIKE ? OR first_name ||' '|| last_name ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
- # end
   
   end

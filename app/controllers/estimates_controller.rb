@@ -10,6 +10,8 @@ class EstimatesController < ApplicationController
   # GET /estimates/1
   # GET /estimates/1.json
   def show
+    @estimate = Estimate.find(params[:id])
+    @estimate_items = @estimate.estimate_items
   end
 
   # GET /estimates/new

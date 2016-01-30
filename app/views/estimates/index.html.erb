@@ -19,13 +19,13 @@
 	  <tbody>
 	    <% @estimates.each do |estimate| %>
 	      <tr>
-		<td><%= estimate.date %></td>
-		<td><%= estimate.total %></td>
-		<td><%= estimate.notes %></td>
-		<td><%= estimate.client %></td>
-		<td><%= link_to 'Show', class: 'btn btn-mini btn-default' %></td>
-		<td><%= link_to 'Edit', class: 'btn btn-mini btn-success' %></td>
-		<td><%= link_to 'Destroy', estimate, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+          <td><%= estimate.date %></td>
+          <td><%= estimate.total %></td>
+          <td><%= estimate.notes %></td>
+          <td><%= estimate.client %></td>
+          <td><%= link_to 'Show', estimate, class: 'btn btn-mini btn-default' %></td>
+          <td><%= link_to 'Edit', edit_estimate_path(estimate), class: 'btn btn-mini btn-success' %></td>
+          <td><%= link_to 'Destroy', estimate, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>

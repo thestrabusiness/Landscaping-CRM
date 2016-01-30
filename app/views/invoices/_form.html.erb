@@ -30,9 +30,10 @@
   </div>
 <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
+    <% options = ['PENDING', 'SENT', 'PAID'] %>
+    <%= f.select :status, options %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
