@@ -9,18 +9,14 @@ class Invoice < ActiveRecord::Base
   def client_name=(name)
     self.client = Client.find_by(:last_name => lastname) if lastname.present?
   end
-      
-  def set_sent
+
+  def balance_forward
+    if client.balance == 0
+      0
+    else
+      (client.balance - total)
+    end
   end
-  
-  def set_paid
-  end
-  
-  def show_pdf
-  end
-  
-  def generate_pdf
-  end
-  
+    
 end
 
