@@ -4,10 +4,11 @@
 
 <div class="media">
   <div class="media-body">
-
+  <%= form_tag generate_estimate_pdfs_estimates_path, method: :get do %>
 	<table class="table table-hover">
 	  <thead>
 	    <tr>
+        <th><input type="checkbox" id="selectAll" value="selectAll"></th>
 	      <th>Date</th>
 	      <th>Total</th>
 	      <th>Notes</th>
@@ -19,21 +20,37 @@
 	  <tbody>
 	    <% @estimates.each do |estimate| %>
 	      <tr>
-          <td><%= estimate.date %></td>
+          <td><%= check_box_tag "selected_estimates[]", estimate.id %></td>
+          <td><%= estimate.date.strftime("%m-%d-%y") %></td>
           <td><%= estimate.total %></td>
           <td><%= estimate.notes %></td>
-          <td><%= estimate.client %></td>
+          <td><%= estimate.client.first_name %> <%= estimate.client.last_name %></td>
           <td><%= link_to 'Show', estimate, class: 'btn btn-mini btn-default' %></td>
           <td><%= link_to 'Edit', edit_estimate_path(estimate), class: 'btn btn-mini btn-success' %></td>
           <td><%= link_to 'Destroy', estimate, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
 	      </tr>
-	    <% end %>
+      <% end %>
 	  </tbody>
 	</table>
-
+    <%= submit_tag "Print Selected" %>
+  <% end %>
   </div>
 </div>
 
 <br>
 
 <%= link_to 'New Estimate', new_estimate_path %>
+
+<script>
+  $('#selectAll').click(function() {
+     if (this.checked) {
+         $(':checkbox').each(function() {
+             this.checked = true;                        
+         });
+     } else {
+        $(':checkbox').each(function() {
+             this.checked = false;                        
+         });
+     } 
+  });
+</script>
