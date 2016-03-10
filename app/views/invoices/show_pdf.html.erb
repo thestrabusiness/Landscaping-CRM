@@ -70,9 +70,9 @@
         <h4 class='pull-right' align='right'>
           <strong>Invoice subtotal:</strong> <%= number_to_currency(@invoice.total) %>
           <br>
-          <strong>Balance forward:</strong> <%= number_to_currency(@invoice.balance_forward) %>
+          <strong>Balance forward:</strong> <%= number_to_currency(balance_forward) %>
           <br>
-          <strong>Amount due:</strong> <%= number_to_currency(@invoice.total + @invoice.balance_forward) %>
+          <strong>Amount due:</strong> <%= number_to_currency(@invoice.total + balance_forward) %>
         </h4>
       </div>
     </div>

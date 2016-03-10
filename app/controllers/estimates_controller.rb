@@ -62,48 +62,6 @@ class EstimatesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  def estimate_pdf
-    @estimate = Estimate.find(params[:id])
-    @estimate_items = @estimate.estimate_items
-    
-    render :layout => 'pdf_layout'
-  end
-  
-  def view_estimate_pdf
-    @estimate = Estimate.find(params[:id])
-    path = estimate_pdf_estimate_url(@estimate)
-    filename = "estimate_#{@estimate.id}"
-    
-    kit = PDFKit.new(path)
-    pdf = kit.to_pdf
-    send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
-  end
-  
-  def generate_estimate_pdfs
-    #generate pdfs from selected invoices and save each to file
-    @estimates = Estimate.find(params[:selected_estimates])
-    files = []
-    @estimates.each do |estimate|
-      path = estimate_pdf_estimate_url(estimate)
-      filename = "estimate_#{estimate.id}.pdf"
-      files.push filename    
-      
-      kit = PDFKit.new(path)
-      pdf = kit.to_file("#{Rails.root}/public/estimates/#{filename}")
-    end
-    
-    #Combine generated PDFs into single file
-    pdf_pack = CombinePDF.new
-    files.each do |file|
-      pdf_pack << CombinePDF.load("#{Rails.root}/public/estimates/#{file}")
-    end
-    pack_filename = "estimates#{Date.today.to_formatted_s(:iso8601)}.pdf"
-    pdf_pack.save "#{Rails.root}/public/estimates/#{pack_filename}"
-    
-    send_file("#{Rails.root}/public/estimates/#{pack_filename}", :type => 'application/pdf', :disposition => 'inline')
-  
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

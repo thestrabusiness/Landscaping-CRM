@@ -3,11 +3,6 @@ Rails.application.routes.draw do
   
   resources :estimates do
     resources :estimate_items, except: [:index], controller: 'estimates/estimate_items'
-    member do
-      get :estimate_pdf
-      get :view_estimate_pdf
-    end
-    collection { get :generate_estimate_pdfs }
   end
   
   resources :payments

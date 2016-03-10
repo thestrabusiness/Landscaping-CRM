@@ -146,6 +146,13 @@ class InvoicesController < ApplicationController
   
   end
   
+  def balance_forward
+    if @invoice.client.balance == 0
+      0
+    else
+      (@invoice.client.balance - @invoice.total)
+    end
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.
