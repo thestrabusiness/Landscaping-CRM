@@ -1,3 +1,4 @@
+listen '162.243.241.241:3000'
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 4)
 timeout 15
 preload_app true

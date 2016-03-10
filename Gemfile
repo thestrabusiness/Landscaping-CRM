@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.3'
+gem 'raindrops', '0.16.0'
+gem 'rake', '10.5.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -15,7 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg' # postgres gem
 gem 'bootstrap-sass' # Bootstrap for easy style development
 gem 'pdfkit'  # pdfkit to generate client invoices from html of invoice views --REQUIRES WKHTMLTOPDF--
-gem 'unicorn' # use unicorn because pdfkit hangs if you use webrick
+gem 'unicorn', '5.0.1'  # use unicorn because pdfkit hangs if you use webrick
 gem 'combine_pdf' # use combine_pdf to combine generated pdfs into single file for easier handling
 gem 'schema_to_scaffold' # Copy existing database schema to schema.rb file and generate scaffolds for all relevant controllers
 gem 'sunspot_rails' # sunspot search
