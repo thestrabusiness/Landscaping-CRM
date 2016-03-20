@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  devise_for :users
   resources :estimates do
     resources :estimate_items, except: [:index], controller: 'estimates/estimate_items'
     member do

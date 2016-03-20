@@ -46,4 +46,8 @@ Rails.application.configure do
     ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG'
   )
   
+  config.action_mailer.default_url_options = { :host => '192.168.1.20:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  
 end
