@@ -21,9 +21,13 @@ class ClientsController < ApplicationController
     
   respond_to do |format|
       format.html
-      format.csv { render text: @clients.to_csv }
+      format.csv do
+        @clients = Client.all
+        render text: @clients.to_csv
+      end        
     end
   end
+
 
   # GET /clients/1
   # GET /clients/1.json

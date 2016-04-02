@@ -15,3 +15,10 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore Solr Files
+/solr
+
+# Ignore some config files
+/config/unicorn.rb
+/config/database.yml
