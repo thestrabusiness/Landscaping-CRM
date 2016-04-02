@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
   
   
+  devise_for :users
+  
+  devise_scope :user do
+    authenticated do
+      root to: "clients#index"
+    end
+    
+    unauthenticated do
+      root to: 'devise/sessions#new', as: 'unauthenticated_root'
+    end
+  end
+  
   resources :estimates do
     resources :estimate_items, except: [:index], controller: 'estimates/estimate_items'
     member do
@@ -37,7 +49,5 @@ Rails.application.routes.draw do
   resources :recurring_prices, controller: 'clients/recurring_prices' do
     collection { post :import }
   end
-    
-  root "clients#index"
   
 end

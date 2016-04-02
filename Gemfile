@@ -23,7 +23,7 @@ gem 'schema_to_scaffold' # Copy existing database schema to schema.rb file and g
 gem 'sunspot_rails' # sunspot search
 gem 'sunspot_solr' #solr distribution for sunspot
 gem 'rails4-autocomplete' #autocomplete function for search fields
-
+gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

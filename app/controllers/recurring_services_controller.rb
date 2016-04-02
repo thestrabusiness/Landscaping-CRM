@@ -1,4 +1,5 @@
 class RecurringServicesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_recurring_service, only: [:show, :edit, :update, :destroy]
 
   # GET /recurring_services

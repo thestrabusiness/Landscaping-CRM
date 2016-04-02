@@ -10,15 +10,24 @@
 
 <div class="container">
   <ul class="nav nav-tabs">
-    <li><%= link_to "Login", root_path %></li>
-    <li><%= link_to "Clients", clients_path %></li>
-    <li><%= link_to "Invoices", invoices_path %></li>
-    <li><%= link_to "Estimates", estimates_path %></li>
-    <li><%= link_to "Payments", payments_path %></li>
-    <li><%= link_to "Services", recurring_services_path %></li>
+    <% if current_user %>
+      <li><%= link_to "Clients", clients_path %></li>
+      <li><%= link_to "Invoices", invoices_path %></li>
+      <li><%= link_to "Estimates", estimates_path %></li>
+      <li><%= link_to "Payments", payments_path %></li>
+      <li><%= link_to "Services", recurring_services_path %></li>
+      <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign In", root_path %> </li>
+    <% end %>   
   </ul> 
 </div>
-    
+
+<p class="alert"><%= alert %></p>
+<% if current_user %>  
+  <p><%= current_user.email %></p>
+<% end %>
+  
 <%= yield %>
 
 </body>

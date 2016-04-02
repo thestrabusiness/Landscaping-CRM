@@ -1,4 +1,5 @@
 class InvoicesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show_pdf, :generate_pdf, :generate_multiple_pdfs]
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
 

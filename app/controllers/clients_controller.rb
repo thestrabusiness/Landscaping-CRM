@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   # GET /clients
@@ -20,9 +21,13 @@ class ClientsController < ApplicationController
     
   respond_to do |format|
       format.html
-      format.csv { render text: @clients.to_csv }
+      format.csv do
+        @clients = Client.all
+        render text: @clients.to_csv
+      end        
     end
   end
+
 
   # GET /clients/1
   # GET /clients/1.json
