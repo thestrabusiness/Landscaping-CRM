@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20160319234904) do
     t.string   "job_address"
     t.string   "city"
     t.string   "state"
-    t.string   "zip",             limit: 5
-    t.money    "balance",                   scale: 2
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "zip"
+    t.money    "balance",         scale: 2
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "phone_number"
   end
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160319234904) do
     t.string   "status"
     t.string   "note"
     t.money    "total",        scale: 2
-    t.integer  "client_id",              null: false
+    t.integer  "client_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -81,12 +81,14 @@ ActiveRecord::Schema.define(version: 20160319234904) do
   create_table "recurring_prices", force: :cascade do |t|
     t.string   "name"
     t.money    "price",      scale: 2
+    t.integer  "clients_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "client_id"
   end
 
   add_index "recurring_prices", ["client_id"], name: "index_recurring_prices_on_client_id", using: :btree
+  add_index "recurring_prices", ["clients_id"], name: "index_recurring_prices_on_clients_id", using: :btree
 
   create_table "recurring_services", force: :cascade do |t|
     t.string   "name"
@@ -134,4 +136,5 @@ ActiveRecord::Schema.define(version: 20160319234904) do
   add_foreign_key "estimates", "clients"
   add_foreign_key "payments", "clients"
   add_foreign_key "payments", "invoices"
+  add_foreign_key "services", "invoices"
 end

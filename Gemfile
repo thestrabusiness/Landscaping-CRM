@@ -22,6 +22,7 @@ gem 'combine_pdf' # use combine_pdf to combine generated pdfs into single file f
 gem 'schema_to_scaffold' # Copy existing database schema to schema.rb file and generate scaffolds for all relevant controllers
 gem 'sunspot_rails' # sunspot search
 gem 'sunspot_solr' #solr distribution for sunspot
+gem 'will_paginate' #for pagination of search results and client/invoice/payment/etc lists
 gem 'rails4-autocomplete' #autocomplete function for search fields
 gem 'devise'
 group :development, :test do

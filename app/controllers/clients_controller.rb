@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
     @search = Client.search do
       fulltext params[:search]
       order_by(:last_name, :asc)
+      paginate(:page => params[:page] || 1, :per_page => 30)
     end
     @clients = @search.results
       
@@ -51,10 +52,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     @client.balance = 0
-    
-    #client_id_max = Client.maximum("id")
-    #@client.id = client_id_max + 1
-    
+        
     respond_to do |format|
       if @client.save
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
