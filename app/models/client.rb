@@ -6,6 +6,7 @@ class Client < ActiveRecord::Base
   has_many :recurring_services, through: :recurring_prices
   
   searchable do
+    text :id
     text :first_name
     text :last_name
     text :job_address
@@ -13,6 +14,7 @@ class Client < ActiveRecord::Base
     text :city
     string :first_name
     string :last_name
+    string :id
   end
     
   def client_summary

@@ -7,7 +7,7 @@ class ClientsController < ApplicationController
   def index
     @search = Client.search do
       fulltext params[:search]
-      order_by(:last_name, :asc)
+      order_by(:id, :asc)
       paginate(:page => params[:page] || 1, :per_page => 30)
     end
     @clients = @search.results
