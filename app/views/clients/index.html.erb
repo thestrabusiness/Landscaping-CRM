@@ -38,6 +38,7 @@
             <td><%= "%05d" % client.zip %></td>
             <td><%= link_to 'Details', client, class: 'btn btn-mini btn-default' %></td>
             <td><%= link_to 'Edit', edit_client_path(client), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Destroy', client, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

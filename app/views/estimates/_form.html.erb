@@ -24,8 +24,9 @@
     <%= f.text_field :notes %>
   </div>
   <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.text_field :client_id %>
+    <%= f.label :client %><br>
+    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}} %>
+    <%= f.hidden_field :client_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

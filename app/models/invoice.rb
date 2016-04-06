@@ -3,11 +3,11 @@ class Invoice < ActiveRecord::Base
   has_many :services, dependent: :destroy
   
   def client_name
-    client.try(:last_name)
+#    client.try(:last_name)
   end
   
   def client_name=(name)
-    self.client = Client.find_by(:last_name => lastname) if lastname.present?
+#    self.client = Client.find_by(:last_name => lastname) if lastname.present?
   end
 
   def balance_forward
