@@ -16,9 +16,13 @@ class Client < ActiveRecord::Base
     string :last_name
     string :id
   end
-    
+  
+  def full_name
+    [first_name, last_name].each{|e| e.to_s.strip!}.join(' ')
+  end
+  
   def client_summary
-    [first_name, last_name, job_address].each{|e| e.to_s.strip!}.join(', ')
+    [full_name, job_address].each{|e| e.to_s.strip!}.join(' - ')
   end    
 
   def self.import(file)
