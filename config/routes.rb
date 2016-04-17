@@ -39,7 +39,10 @@ Rails.application.routes.draw do
       get :show_pdf
       get :generate_pdf
     end
-    collection { get :generate_multiple_pdfs }
+    collection do
+      get :generate_multiple_pdfs
+      get :labels
+    end
   end
     
   resources :clients do

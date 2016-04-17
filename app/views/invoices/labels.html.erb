@@ -1,0 +1,7 @@
+<% @invoices.each do |label| %>
+  <div class="label">
+    <%= label.client.first_name %> <%= label.client.last_name %> <br>
+    <%= label.client.billing_address %> <br>
+    <%= label.client.city %>, <%= label.client.state %> <%= label.client.zip %>  
+  </div>
+<% end %>

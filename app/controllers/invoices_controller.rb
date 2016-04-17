@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show_pdf, :generate_pdf, :generate_multiple_pdfs]
+  before_filter :authenticate_user!, :except => [:show_pdf, :generate_pdf, :generate_multiple_pdfs, :labels]
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
 
@@ -123,30 +123,35 @@ class InvoicesController < ApplicationController
   end
   
   def generate_multiple_pdfs
-    #generate pdfs from selected invoices and save each to file
-    @invoices = Invoice.find(params[:selected_invoices])
-    files = []
-    @invoices.each do |invoice|
-      path = show_pdf_invoice_url(invoice)
-      filename = "invoice_#{invoice.id}.pdf"
-      files.push filename    
-      
-      kit = PDFKit.new(path)
-      pdf = kit.to_file("#{Rails.root}/public/invoices/#{filename}")
-    end
+    if params[:commit] == "Print Labels"
+      @invoices = Invoice.find(params[:selected_invoices])
+      render :labels, :layout => 'labels_layout'
+    else
+      #generate pdfs from selected invoices and save each to file
+      @invoices = Invoice.find(params[:selected_invoices])
+      files = []
+      @invoices.each do |invoice|
+        path = show_pdf_invoice_url(invoice)
+        filename = "invoice_#{invoice.id}.pdf"
+        files.push filename    
+
+        kit = PDFKit.new(path)
+        pdf = kit.to_file("#{Rails.root}/public/invoices/#{filename}")
+      end
     
-    #Combine generated PDFs into single file
-    pdf_pack = CombinePDF.new
-    files.each do |file|
-      pdf_pack << CombinePDF.load("#{Rails.root}/public/invoices/#{file}")
+
+
+      #Combine generated PDFs into single file
+      pdf_pack = CombinePDF.new
+      files.each do |file|
+        pdf_pack << CombinePDF.load("#{Rails.root}/public/invoices/#{file}")
+      end
+      pack_filename = "invoices_#{Date.today.to_formatted_s(:iso8601)}.pdf"
+      pdf_pack.save "#{Rails.root}/public/invoices/#{pack_filename}"
+
+      send_file("#{Rails.root}/public/invoices/#{pack_filename}", :type => 'application/pdf')
     end
-    pack_filename = "invoices_#{Date.today.to_formatted_s(:iso8601)}.pdf"
-    pdf_pack.save "#{Rails.root}/public/invoices/#{pack_filename}"
-    
-    send_file("#{Rails.root}/public/invoices/#{pack_filename}", :type => 'application/pdf', :disposition => 'inline')
-  
   end
-  
   
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -165,6 +170,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :performed_by, :status, :note, :client_id, :client_lastname)
+      params.require(:invoice).permit(:date, :performed_by, :status, :note, :client_id, :client_lastname, :ids, :selected_invoices)
     end
 end
