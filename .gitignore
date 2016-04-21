@@ -22,3 +22,4 @@
 # Ignore some config files
 /config/unicorn.rb
 /config/database.yml
+/config/initializers/setup_mail.rb

@@ -16,7 +16,7 @@
     <p> 
       <%= @invoice.client.first_name %> <%= @invoice.client.last_name %> <br>
       <%= @invoice.client.billing_address %> <br>
-      <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= @invoice.client.zip %>   
+      <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= "%05d" % @invoice.client.zip %>   
       </p>
     </div>
 

@@ -36,14 +36,14 @@
             <td><%= invoice.performed_by %></td>
             <td><%= invoice.status %></td>
             <td><%= invoice.note %></td>
-            <td><%= link_to 'Show', invoice, class: 'btn btn-mini btn-default' %></td>
-            <td><%= link_to 'Edit', edit_invoice_path(invoice), class: 'btn btn-mini btn-success' %></td>
-            <td><%= link_to 'Destroy', invoice, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Show Invoice', invoice, class: 'btn btn-mini btn-success' %></td>
           </tr>
         <% end %>
       </tbody>
     </table> 
-    <%= submit_tag "Print Selected Invoices" %> <%= submit_tag "Print Labels" %>
+      <div class='btn-group'>
+        <%= submit_tag "Print Selected Invoices", class: 'btn btn-primary' %> <%= submit_tag "Print Labels", class: 'btn btn-primary' %>
+      </div>
     <% end %>
   </div>
 </div>

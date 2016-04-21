@@ -17,16 +17,15 @@
       <li><%= link_to "Payments", payments_path %></li>
       <li><%= link_to "Services", recurring_services_path %></li>
       <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-    <% else %>
+      <% else %>
       <li><%= link_to "Sign In", root_path %> </li>
-    <% end %>   
+    <% end %>
+    <li style="float:right"><%= link_to "Edit Profile", edit_user_registration_path %> </li>
+    <li style="float:right"><%= link_to "Hello, #{current_user.email}!" %> </li>
   </ul> 
 </div>
 
 <p class="alert"><%= alert %></p>
-<% if current_user %>  
-  <p><%= current_user.email %></p>
-<% end %>
   
 <%= yield %>
 
