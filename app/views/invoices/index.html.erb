@@ -11,6 +11,8 @@
   </div>
 </div>
 
+<%= link_to 'New Invoice', new_invoice_path %>
+
 <div class="media">
   <div class="media-body">
     <%= form_tag generate_multiple_pdfs_invoices_path, method: :get do %>
@@ -49,8 +51,6 @@
 </div>
 
 <br>
-
-<%= link_to 'New Invoice', new_invoice_path %>
 
 <script>
   $('#selectAll').click(function() {
