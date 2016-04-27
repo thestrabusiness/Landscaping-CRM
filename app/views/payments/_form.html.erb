@@ -17,19 +17,19 @@
   </div>
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount, required: true %>
   </div>
   <div class="field">
     <%= f.label :payment_type %><br>
-    <%= f.text_field :payment_type %>
+    <%= f.text_field :payment_type, required: true %>
   </div>
   <div class="field">
     <%= f.label :invoice_id %><br>
-    <%= f.text_field :invoice_id %>
+    <%= f.text_field :invoice_id, data: {autocomplete_source: Invoice.order(:id).map{ |m| {:label=>m.invoice_summary, :id=>m.id}}},  required: true %>
   </div>
   <div class="field">
     <%= f.label :client %><br>
-    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}} %>
+    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}}, required: true %>
     <%= f.hidden_field :client_id %>
   </div>
   <div class="actions">

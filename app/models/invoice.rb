@@ -17,6 +17,10 @@ class Invoice < ActiveRecord::Base
       (client.balance - total)
     end
   end
-    
+
+  def invoice_summary
+    [date.strftime("%m/%d/%y"), client.last_name, ("$"+total.to_s)].join (' - ')
+  end
+  
 end
 

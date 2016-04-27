@@ -17,21 +17,16 @@
   </div>
   <div class="field">
     <%= f.label :performed_by %><br>
-    <%= f.text_field :performed_by %>
+    <%= f.text_field :performed_by, required: true %>
   </div>
   <div class="field">
     <%= f.label :note %><br>
-    <%= f.text_field :note %>
+    <%= f.text_field :note, required: true %>
   </div>
   <div class="field">
     <%= f.label :client %><br>
-    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}} %>
+    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}}, required: true %>
     <%= f.hidden_field :client_id %>
-  </div>
-<div class="field">
-    <%= f.label :status %><br>
-    <% options = ['PENDING', 'SENT', 'PAID'] %>
-    <%= f.select :status, options %>
   </div>
   <br>
   <div class="actions">

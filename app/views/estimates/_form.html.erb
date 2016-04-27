@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date %>
+    <%= f.date_select :date, required: true %>
   </div>
   <div class="field">
     <%= f.label :total %><br>
-    <%= f.text_field :total %>
+    <%= f.text_field :total, required: true %>
   </div>
   <div class="field">
     <%= f.label :notes %><br>
-    <%= f.text_field :notes %>
+    <%= f.text_field :notes, required: true %>
   </div>
   <div class="field">
     <%= f.label :client %><br>
-    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}} %>
+    <%= f.text_field :client_name, data: {autocomplete_source: Client.order(:last_name).map{ |m| {:label=>m.client_summary, :id=>m.id}}}, required: true %>
     <%= f.hidden_field :client_id %>
   </div>
   <div class="actions">

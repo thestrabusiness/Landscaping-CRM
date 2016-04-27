@@ -13,31 +13,31 @@
 
   <div class="field">
     <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, required: true %>
   </div>
   <div class="field">
     <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, required: true %>
   </div>
   <div class="field">
     <%= f.label :billing_address %><br>
-    <%= f.text_field :billing_address %>
+    <%= f.text_field :billing_address, required: true %>
   </div>
   <div class="field">
     <%= f.label :job_address %><br>
-    <%= f.text_field :job_address %>
+    <%= f.text_field :job_address, required: true %>
   </div>
   <div class="field">
     <%= f.label :city %><br>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, required: true %>
   </div>
   <div class="field">
     <%= f.label :state %><br>
-    <%= f.text_field :state %>
+    <%= f.text_field :state, required: true %>
   </div>
   <div class="field">
     <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
+    <%= f.text_field :zip, required: true %>
   </div>
   <div class="actions">
     <%= f.submit %>
