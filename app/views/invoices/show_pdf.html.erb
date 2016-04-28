@@ -24,7 +24,7 @@
     <p> 
       <strong>Invoice number:</strong> <%= @invoice.id %> <br>
       <strong>Invoice date:</strong> <%= @invoice.date.strftime("%m-%d-%y") %> <br>
-      <strong>Payment due by:</strong> <%= (@invoice.date + (30*24*60*60)).strftime("%m-%d-%y") %>
+      <strong>Payment due by:</strong> <%= (@invoice.date + (14*24*60*60)).strftime("%m-%d-%y") %>
       </p>
     </div>
   <br>
