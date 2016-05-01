@@ -35,7 +35,7 @@
             <td><%= client.job_address %></td>
             <td><%= client.city %></td>
             <td><%= client.state %></td>
-            <td><%= "%05d" % client.zip %></td>
+            <td><%= "#{client.zip}".rjust(5, '0') %></td>
             <td><%= link_to 'Details', client, class: 'btn btn-mini btn-default' %></td>
             <td><%= link_to 'Edit', edit_client_path(client), class: 'btn btn-mini btn-success' %></td>
           </tr>

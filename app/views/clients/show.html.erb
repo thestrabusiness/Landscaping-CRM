@@ -33,7 +33,7 @@
 
   <p>
     <strong>Zip:</strong>
-    <%= "%05d" % @client.zip %>
+    <%= "#{client.zip}".rjust(5, '0') %>
   </p>
 </div>
 

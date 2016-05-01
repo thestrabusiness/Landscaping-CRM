@@ -2,6 +2,6 @@
   <div class="label">
     <%= label.client.first_name %> <%= label.client.last_name %> <br>
     <%= label.client.billing_address %> <br>
-    <%= label.client.city %>, <%= label.client.state %> <%= "%05d" % label.client.zip %>  
+    <%= label.client.city %>, <%= label.client.state %> <%= "#{label.client.zip}".rjust(5, '0') %>  
   </div>
 <% end %>
