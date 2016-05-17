@@ -29,26 +29,19 @@ class ClientsController < ApplicationController
     end
   end
 
-
-  # GET /clients/1
-  # GET /clients/1.json
   def show
     @client = Client.find(params[:id])
     @recurring_prices = @client.recurring_prices
     @recurring_services = RecurringService.all
   end
 
-  # GET /clients/new
   def new
     @client = Client.new
   end
 
-  # GET /clients/1/edit
   def edit
   end
 
-  # POST /clients
-  # POST /clients.json
   def create
     @client = Client.new(client_params)
     @client.balance = 0
@@ -64,8 +57,6 @@ class ClientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
   def update
     respond_to do |format|
       if @client.update(client_params)
@@ -78,8 +69,6 @@ class ClientsController < ApplicationController
     end
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
     @client.destroy
     respond_to do |format|
@@ -91,6 +80,12 @@ class ClientsController < ApplicationController
   def import
     Client.import(params[:file])
     redirect_to clients_path, notice: "Clients added succesfully!"
+  end
+
+  def summary
+    @clients = Client.all.order(id: :asc)
+    
+    render :layout => 'pdf_layout'
   end
   
 

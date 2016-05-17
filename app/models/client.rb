@@ -31,6 +31,17 @@ class Client < ActiveRecord::Base
     end
   end
   
+  def last_payment
+    payment = Payment.where(:client_id => id).scoping do
+      Payment.last
+    end
+    if payment == nil
+      " "
+    else
+      payment.amount
+    end
+  end
+  
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names

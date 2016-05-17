@@ -26,9 +26,15 @@ Rails.application.routes.draw do
   resources :recurring_services
   
   resources :clients do
+      collection do
+        post :import
+        get :summary
+    end
+    
     resources :recurring_prices, except: [:index], controller: 'clients/recurring_prices' do
       collection { post :import }
     end
+    
   end
   
   resources :invoices do
@@ -43,10 +49,6 @@ Rails.application.routes.draw do
       get :generate_multiple_pdfs
       get :labels
     end
-  end
-    
-  resources :clients do
-    collection { post :import }
   end
   
   resources :recurring_prices, controller: 'clients/recurring_prices' do

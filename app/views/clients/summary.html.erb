@@ -1,0 +1,32 @@
+<div class="media">
+  <div class="media-body"> 
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Job Address</th>
+          <th>Balance</th>
+          <th>Last Payment Recieved</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td><%= client.id %></td>
+            <td><%= client.full_name %></td>
+            <td>
+              <%= client.job_address %><br>
+              <%= client.city%>, <%= client.state %> <%= client.zip %>
+            </td>
+            <td><%= client.balance %></td>
+            <td><%= client.last_payment %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
