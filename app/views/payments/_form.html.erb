@@ -24,8 +24,9 @@
     <%= f.text_field :payment_type, required: true %>
   </div>
   <div class="field">
-    <%= f.label :invoice_id %><br>
-    <%= f.text_field :invoice_id, data: {autocomplete_source: Invoice.order(:id).map{ |m| {:label=>m.invoice_summary, :id=>m.id}}},  required: true %>
+    <%= f.label :select_invoice %><br>
+    <%= f.text_field :select_invoice, data: {autocomplete_source: Invoice.order(:id).map{ |m| {:label=>m.invoice_summary, :id=>m.id}}},  required: true %>
+    <%= f.hidden_field :invoice_id %>
   </div>
   <div class="field">
     <%= f.label :client %><br>

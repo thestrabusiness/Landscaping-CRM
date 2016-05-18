@@ -25,7 +25,7 @@
         <td><%= payment.date %></td>
         <td><%= payment.amount %></td>
         <td><%= payment.payment_type %></td>
-        <td><%= payment.invoice.id %></td>
+        <td><%= payment.invoice_id %></td>
         <td><%= payment.client.first_name %> <%= payment.client.last_name  %></td>
         <td><%= link_to 'Show', payment, class: 'btn btn-mini btn-default' %></td>
         <td><%= link_to 'Edit', edit_payment_path(payment), class: 'btn btn-mini btn-success' %></td>

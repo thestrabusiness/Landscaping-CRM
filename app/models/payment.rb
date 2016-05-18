@@ -2,6 +2,9 @@ class Payment < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :client
   
+  def select_invoice
+  end
+  
   def client_name
   end
   
