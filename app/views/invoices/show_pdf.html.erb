@@ -70,16 +70,21 @@
         <h4 class='pull-right' align='right'>
           <strong>Invoice subtotal:</strong> <%= number_to_currency(@invoice.total) %>
           <br>
+          <% case @invoice.check_balance_forward %>
+          <% when 0, 2 %>
           <strong>Balance forward:</strong> <%= number_to_currency(@invoice.balance_forward) %>
           <br>
-          <strong>Amount due:</strong> <%= number_to_currency(@invoice.total + @invoice.balance_forward) %>
+          <strong>Amount due:</strong> <%= number_to_currency(@invoice.amount_due) %>
+          <% when 1 %>
+          <strong>Payment Received:</strong> <%= number_to_currency(@invoice.client.last_payment) %>
+          <br>
+          <strong>Amount due:</strong> <%= number_to_currency(@invoice.client.balance) %>
+          <% end %>
         </h4>
       </div>
     </div>
   </div>
   
   <h4>Please make checks payable to: Aurelio Moffa, P.O. Box 555, Revere, MA 02151. If you have any questions please call 781-526-2967.</h4>
-
-  <br>
 
 </div>
