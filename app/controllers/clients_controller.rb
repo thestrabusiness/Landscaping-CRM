@@ -33,6 +33,8 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     @recurring_prices = @client.recurring_prices
     @recurring_services = RecurringService.all
+    @invoices = Invoice.where(:client_id => params[:id]).limit(5)
+    @payments = Payment.where(:client_id => params[:id]).limit(5)
   end
 
   def new

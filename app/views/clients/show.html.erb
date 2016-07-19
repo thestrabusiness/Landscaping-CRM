@@ -1,51 +1,109 @@
 <p id="notice"><%= notice %></p>
 
-<div style="width:50%; float:left;">
-  <p>
-    <strong>First name:</strong>
-    <%= @client.first_name %>
-  </p>
+<div style="display: flex;">
+  <div style="flex: 1;">
+    <p>
+      <strong>First name:</strong>
+      <%= @client.first_name %>
+    </p>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= @client.last_name %>
-  </p>
+    <p>
+      <strong>Last name:</strong>
+      <%= @client.last_name %>
+    </p>
 
-  <p>
-    <strong>Billing address:</strong>
-    <%= @client.billing_address %>
-  </p>
+    <p>
+      <strong>Billing address:</strong>
+      <%= @client.billing_address %>
+    </p>
 
-  <p>
-    <strong>Job address:</strong>
-    <%= @client.job_address %>
-  </p>
+    <p>
+      <strong>Job address:</strong>
+      <%= @client.job_address %>
+    </p>
 
-  <p>
-    <strong>City:</strong>
-    <%= @client.city %>
-  </p>
+    <p>
+      <strong>City:</strong>
+      <%= @client.city %>
+    </p>
 
-  <p>
-    <strong>State:</strong>
-    <%= @client.state %>
-  </p>
+    <p>
+      <strong>State:</strong>
+      <%= @client.state %>
+    </p>
 
-  <p>
-    <strong>Zip:</strong>
-    <%= "#{@client.zip}".rjust(5, '0') %>
-  </p>
+    <p>
+      <strong>Zip:</strong>
+      <%= "#{@client.zip}".rjust(5, '0') %>
+    </p>
+  </div>
+
+  <div style="flex: 1;">  
+    <p>
+      <strong>Balance:</strong>
+      <%= number_to_currency(@client.balance) %>
+    </p>
+  </div>
 </div>
 
-<div style="width:50%; height:inherit; float:right;">
-  <p>
-    <strong>Balance:</strong>
-    <%= number_to_currency(@client.balance) %>
-  </p>
+
+<div>
+  <div class="media" >
+    <div class="media-body" style="width: 50%; float: left;">
+      <h3>Recent invoices:</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><h4>ID</h4></th>
+            <th><h4>Date</h4></th>
+            <th><h4>Amount</h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invoices.each do |invoice| %>
+          <tr>
+            <td><h4><%= invoice.id %></h4></td>
+            <td><h4><%= invoice.date.strftime("%m-%d-%y") %></h4></td>
+            <td><h4><%= number_to_currency(invoice.total) %></h4></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="media-body" style="width: 50%; float: right;">
+      <h3>Recent payments:</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td><h4>ID</h4></td>
+            <td><h4>Date</h4></td>
+            <td><h4>Amount</h4></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% if @payments.blank? %>
+              <td><h4>No recent payments to show</h4></td>
+              <td></td>
+              <td></td>
+            <% else %>
+              <% @payments.each do |payment| %>
+              <td><h4><%= payment.id %></h4></td>
+              <td><h4><%= payment.date.strftime("%m-%d-%y") %></h4></td>
+              <td><h4><%= number_to_currency(payment.amount) %></h4></td>
+              <% end %>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div class="media" style="clear:both;">
+<div class="media" style="clear: both;">
   <div class="media-body">
+    <h3 style="align:left;">Current services for client:</h1>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -67,10 +125,13 @@
   </div>
 </div>
 
-<div class='btn-group'>
+
+<br>
+
+<div class='btn-group' style="width: 80%">
   <%= link_to 'Edit Client Details', edit_client_path(@client), class: 'btn btn-primary' %> 
   <%= link_to "Add New Service", new_client_recurring_price_path(@client), class: 'btn btn-primary'%> 
   <%= link_to 'Back', clients_path, class: 'btn btn-primary'%>
-  </div>
+</div>
 
 <%= link_to 'Delete Client', @client, method: :delete, class: 'pull-right btn btn-danger', data: { confirm: "This is permanent and can't be reversed. You will lose ALL CLIENT RECORDS! Are you sure?" } %>

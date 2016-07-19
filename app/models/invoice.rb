@@ -23,8 +23,6 @@ class Invoice < ActiveRecord::Base
   def balance_forward
     if client.balance == 0
       0
-    elsif (client.balance - total < 0)
-    	
     else
       (client.balance - total)
     end
