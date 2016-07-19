@@ -82,19 +82,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <% if @payments.blank? %>
+          <% if @payments.blank? %>
+            <tr>
               <td><h4>No recent payments to show</h4></td>
               <td></td>
               <td></td>
-            <% else %>
-              <% @payments.each do |payment| %>
+            </tr>
+          <% else %>
+            <% @payments.each do |payment| %>
+            <tr>
               <td><h4><%= payment.id %></h4></td>
               <td><h4><%= payment.date.strftime("%m-%d-%y") %></h4></td>
               <td><h4><%= number_to_currency(payment.amount) %></h4></td>
-              <% end %>
+            </tr>
             <% end %>
-          </tr>
+          <% end %> 
         </tbody>
       </table>
     </div>
