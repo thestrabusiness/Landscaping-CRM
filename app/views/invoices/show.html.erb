@@ -77,3 +77,6 @@
   <%= link_to "Generate PDF", generate_pdf_invoice_path(@invoice), class: 'btn btn-primary' %>
 </div>
 
+<div>
+<%= link_to 'Delete Invoice', @invoice, method: :delete, class: 'pull-right btn btn-danger', data: { confirm: "This is a permanent action that can't be reversed. Are you sure?" } %>
+</div>

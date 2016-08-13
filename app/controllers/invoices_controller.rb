@@ -62,10 +62,17 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   # DELETE /invoices/1.json
   def destroy
-    @invoice.destroy
-    respond_to do |format|
-      format.html { redirect_to invoices_url, notice: 'Invoice was successfully destroyed.' }
-      format.json { head :no_content }
+    if @invoice.status == "SENT" || @invoice.status == "PAID"
+      respond_to do |format|
+        format.html { redirect_to @invoice, notice: "Invoice has already been #{@invoice.status}!" }
+        format.json { head :no_content }
+      end
+    else
+      @invoice.destroy
+      respond_to do |format|
+        format.html { redirect_to invoices_url, notice: 'Invoice was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
   
@@ -74,7 +81,7 @@ class InvoicesController < ApplicationController
     
     if @invoice.status == "SENT"
       respond_to do |format|
-        format.html { redirect_to @invoice, notice: 'Invoice has already been #{@invoice.status}!' }
+        format.html { redirect_to @invoice, notice: "Invoice has already been #{@invoice.status}!" }
         format.json { head :no_content }
       end
     elsif @invoice.status == "PAID"
@@ -84,10 +91,21 @@ class InvoicesController < ApplicationController
         end
     else    
       @invoice.update_attribute :status, "SENT"
-      flash[:notice] = "Invoice marked as SENT!"
+      flash[:notice] = "Invoice marked as '#{@invoice.status}'!"
       redirect_to @invoice
     end
   end
+  
+  def set_multiple_sent(invoices)
+    invoices.each do |invoice|
+      unless invoice.status == "SENT" || invoice.status == "PAID"
+        invoice.update_attribute :status, "SENT"
+      end
+    end
+    
+    redirect_to invoices_url
+  end
+  
   
   def set_paid
     @invoice = Invoice.find(params[:id])
@@ -99,9 +117,19 @@ class InvoicesController < ApplicationController
         end
     else    
       @invoice.update_attribute :status, "PAID"
-      flash[:notice] = "Invoice marked PAID!"    
+      flash[:notice] = "Invoice marked '#{@invoice.status}'!"    
       redirect_to @invoice
     end
+  end
+  
+  def set_multiple_paid(invoices)
+    invoices.each do |invoice|
+      unless invoice.status == "PAID"
+        invoice.update_attribute :status, "PAID"
+      end
+    end
+    
+    redirect_to invoices_url
   end
   
   def show_pdf    
@@ -123,12 +151,19 @@ class InvoicesController < ApplicationController
   end
   
   def generate_multiple_pdfs
-    if params[:commit] == "Print Labels"
-      @invoices = Invoice.find(params[:selected_invoices])
+    @invoices = Invoice.find(params[:selected_invoices])
+    
+    if params[:commit] == "Print Labels"      
       render :labels, :layout => 'labels_layout'
+    elsif params[:commit] == "Set Sent" || params[:commit] == "Set Paid"
+        if params[:commit] == "Set Sent"
+          set_multiple_sent(@invoices)
+        else
+          set_multiple_paid(@invoices)
+        end
     else
       #generate pdfs from selected invoices and save each to file
-      @invoices = Invoice.find(params[:selected_invoices])
+#      @invoices = Invoice.find(params[:selected_invoices])
       files = []
       @invoices.each do |invoice|
         path = show_pdf_invoice_url(invoice)

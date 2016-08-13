@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421203734) do
+ActiveRecord::Schema.define(version: 20160813173012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160421203734) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "phone_number"
+    t.integer  "cut_order"
   end
 
   create_table "estimate_items", force: :cascade do |t|
@@ -81,14 +82,12 @@ ActiveRecord::Schema.define(version: 20160421203734) do
   create_table "recurring_prices", force: :cascade do |t|
     t.string   "name"
     t.money    "price",      scale: 2
-    t.integer  "clients_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "client_id"
   end
 
   add_index "recurring_prices", ["client_id"], name: "index_recurring_prices_on_client_id", using: :btree
-  add_index "recurring_prices", ["clients_id"], name: "index_recurring_prices_on_clients_id", using: :btree
 
   create_table "recurring_services", force: :cascade do |t|
     t.string   "name"
