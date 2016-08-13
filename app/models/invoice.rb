@@ -1,13 +1,12 @@
 class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :services, dependent: :destroy
+  validates :client_id, presence: true
   
   def client_name
-#    client.try(:last_name)
   end
   
   def client_name=(name)
-#    self.client = Client.find_by(:last_name => lastname) if lastname.present?
   end
   
   def check_balance_forward

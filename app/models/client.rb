@@ -1,4 +1,6 @@
 class Client < ActiveRecord::Base
+  validates :billing_address, :job_address, :city, :zip, presence: true
+  
   self.primary_key = 'id'
   has_many :invoices, dependent: :destroy
   has_many :services, through: :invoices
@@ -25,12 +27,6 @@ class Client < ActiveRecord::Base
     [full_name, job_address].each{|e| e.to_s.strip!}.join(' - ')
   end    
 
-  def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      Client.create! row.to_hash
-    end
-  end
-  
   def last_payment
     payment = Payment.where(:client_id => id).scoping do
       Payment.last
@@ -39,6 +35,12 @@ class Client < ActiveRecord::Base
       " "
     else
       payment.amount
+    end
+  end
+  
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Client.create! row.to_hash
     end
   end
   
@@ -51,4 +53,4 @@ class Client < ActiveRecord::Base
     end
   end
   
-  end
+end

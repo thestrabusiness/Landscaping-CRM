@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date, required: true %>
+    <%= f.date_select :date, :default => Date.today %>
   </div>
   <div class="field">
     <%= f.label :total %><br>
