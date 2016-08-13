@@ -14,8 +14,8 @@ class InvoicesController < ApplicationController
   # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
-    @services = @invoice.services
-    @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
+    @invoice_items = @invoice.invoice_items
+    @client_prices = ClientPrice.where(:client_id => @invoice.client.id)
   end
 
   # GET /invoices/new
@@ -134,8 +134,8 @@ class InvoicesController < ApplicationController
   
   def show_pdf    
     @invoice = Invoice.find(params[:id])
-    @services = @invoice.services
-    @recurring_prices = RecurringPrice.where(:client_id => @invoice.client.id)
+    @invoice_items = @invoice.invoice_items
+    @client_prices = ClientPrice.where(:client_id => @invoice.client.id)
     
     render :layout => 'pdf_layout'
   end

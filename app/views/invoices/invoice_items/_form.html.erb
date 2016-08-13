@@ -1,9 +1,9 @@
-<%= form_for [@invoice, @service] do |f| %>
+<%= form_for [@invoice, @invoice_item] do |f| %>
 
   <div class="control-group">
     <%= f.label :name %>
     <div class="controls">
-      <% options = options_from_collection_for_select(@recurring_prices, 'name', 'name') %>
+      <% options = options_from_collection_for_select(@client_prices, 'name', 'name') %>
       <%= f.select :name, content_tag(:option,'Other',:value=>"other")+options, :prompt => 'Choose a service' %>      
     </div>
   </div>
@@ -47,7 +47,7 @@ $ ( document ).ready(function() {
     $("#other_text_box").hide();
     $("#other_price_box").hide();
   
-    $('#service_name').on('change', function(ev) { 
+    $('#invoice_item_name').on('change', function(ev) { 
         var selected_item = $(ev.currentTarget).val();
         console.log("Your select value is " + selected_item);
         if ( selected_item == 'other' )

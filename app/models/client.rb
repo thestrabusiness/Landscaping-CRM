@@ -3,9 +3,9 @@ class Client < ActiveRecord::Base
   
   self.primary_key = 'id'
   has_many :invoices, dependent: :destroy
-  has_many :services, through: :invoices
-  has_many :recurring_prices, dependent: :destroy
-  has_many :recurring_services, through: :recurring_prices
+  has_many :invoice_items, through: :invoices
+  has_many :client_prices, dependent: :destroy
+  has_many :services, through: :client_prices
   
   searchable do
     text :id

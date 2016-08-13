@@ -31,8 +31,8 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    @recurring_prices = @client.recurring_prices
-    @recurring_services = RecurringService.all
+    @client_prices = @client.client_prices
+    @services = Service.all
     @invoices = Invoice.where(:client_id => params[:id]).limit(5).order(date: :desc)
     @payments = Payment.where(:client_id => params[:id]).limit(5).order(date: :desc)
   end

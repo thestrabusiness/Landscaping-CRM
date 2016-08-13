@@ -58,7 +58,7 @@
 <% end %>
 
 <h3>Import Client Prices</h3>
-<%= form_tag import_recurring_prices_path, multipart: true do %>
+<%= form_tag import_client_prices_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Upload Prices", class: 'btn btn-default' %>
 <% end %>

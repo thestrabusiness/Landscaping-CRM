@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Services</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><h4>Name</h4></th>
+        </tr>
+      </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td width="70%"><h4><%= service.name %></h4></td>
+        <td><h4><%= link_to 'Show', service, class: 'btn btn-mini btn-default' %></h4></td>
+        <td><h4><%= link_to 'Edit', edit_service_path(service), class: 'btn btn-mini btn-success' %></h4></td>
+        <td><h4><%= link_to 'Destroy', service, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></h4></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Service', new_service_path %>

@@ -39,18 +39,18 @@
         </tr>
       </thead>
       <tbody>
-        <% @services.each do |service| %>
+        <% @invoice_items.each do |item| %>
         <tr>
-          <% if service.name.downcase == 'cut' %>
+          <% if item.name.downcase == 'cut' %>
             <td><h4><%= @invoice.date.strftime( "%B" ) %> Lawncare</h4></td>
             <% else %>
-            <td><h4><%= service.name %></h4></td>
+            <td><h4><%= item.name %></h4></td>
             <%end %>            
-            <td><h4><%= service.category  %></h4></td>
-            <td><h4><%= service.quantity %></h4></td>
-            <td><h4><%= number_to_currency(service.price) %> </h4></td>
-            <td><h4><%= number_to_currency(service.price * service.quantity) %> </h4></td> 
-            <td><h4><%= link_to "Delete", [@invoice, service], method: :delete, confirm: "Are you sure you want to delete this service?" %></h4></td>
+            <td><h4><%= item.category  %></h4></td>
+            <td><h4><%= item.quantity %></h4></td>
+            <td><h4><%= number_to_currency(item.price) %> </h4></td>
+            <td><h4><%= number_to_currency(item.price * item.quantity) %> </h4></td> 
+            <td><h4><%= link_to "Delete", [@invoice, item], method: :delete, confirm: "Are you sure you want to delete this item?" %></h4></td>
           </tr>
         <% end %>
       </tbody>
@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<%= link_to "Add new item", new_invoice_service_path(@invoice), class: 'pull-right' %>
+<%= link_to "Add new item", new_invoice_invoice_item_path(@invoice), class: 'pull-right' %>
 
 <br>
 

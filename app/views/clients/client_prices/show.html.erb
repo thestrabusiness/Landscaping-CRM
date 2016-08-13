@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @client_price.price %>
+</p>
+
+<p>
+  <strong>Clients:</strong>
+  <%= @client_price.client %>
+</p>
+
+<p>
+  <strong>Services:</strong>
+  <%= @client_price.services %>
+</p>
+
+<%= link_to 'Edit', edit_client_price_path(@client_price) %> |
+<%= link_to 'Back', client_prices_path %>

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
   
   resources :payments
-  resources :recurring_services
+  resources :services
   
   resources :clients do
       collection do
@@ -31,14 +31,14 @@ Rails.application.routes.draw do
         get :summary
     end
     
-    resources :recurring_prices, except: [:index], controller: 'clients/recurring_prices' do
+    resources :client_prices, except: [:index], controller: 'clients/client_prices' do
       collection { post :import }
     end
     
   end
   
   resources :invoices do
-    resources :services, except: [:index], controller: 'invoices/services'
+    resources :invoice_items, except: [:index], controller: 'invoices/invoice_items'
     member do
       put :set_sent
       put :set_paid
@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :recurring_prices, controller: 'clients/recurring_prices' do
+  resources :client_prices, controller: 'clients/client_prices' do
     collection { post :import }
   end
   

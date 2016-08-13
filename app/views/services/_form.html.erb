@@ -1,10 +1,10 @@
-<%= form_for(@recurring_service) do |f| %>
-  <% if @recurring_service.errors.any? %>
+<%= form_for(@service) do |f| %>
+  <% if @service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@recurring_service.errors.count, "error") %> prohibited this recurring_service from being saved:</h2>
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
 
       <ul>
-      <% @recurring_service.errors.full_messages.each do |message| %>
+      <% @service.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

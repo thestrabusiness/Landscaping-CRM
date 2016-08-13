@@ -1,6 +1,6 @@
 class Invoice < ActiveRecord::Base
   belongs_to :client
-  has_many :services, dependent: :destroy
+  has_many :invoice_items, dependent: :destroy
   validates :client_id, presence: true
   
   def client_name

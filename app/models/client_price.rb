@@ -1,10 +1,10 @@
-class RecurringPrice < ActiveRecord::Base
+class ClientPrice < ActiveRecord::Base
   belongs_to :clients
-  belongs_to :recurring_services
+  belongs_to :services
   
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      RecurringPrice.create! row.to_hash
+      ClientPrice.create! row.to_hash
     end
   end
   
