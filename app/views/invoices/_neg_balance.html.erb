@@ -1,0 +1,3 @@
+<strong>Payment Received:</strong> <%= number_to_currency(@invoice.client.last_payment) %>
+<br>
+<strong>Amount due:</strong> <%= number_to_currency(@invoice.client.balance) %>

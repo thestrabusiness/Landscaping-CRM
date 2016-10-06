@@ -132,10 +132,9 @@ class InvoicesController < ApplicationController
     redirect_to invoices_url
   end
   
-  def show_pdf    
+  def show_pdf
     @invoice = Invoice.find(params[:id])
     @invoice_items = @invoice.invoice_items
-    @client_prices = ClientPrice.where(:client_id => @invoice.client.id)
     
     render :layout => 'pdf_layout'
   end
@@ -162,8 +161,8 @@ class InvoicesController < ApplicationController
           set_multiple_paid(@invoices)
         end
     else
+      
       #generate pdfs from selected invoices and save each to file
-#      @invoices = Invoice.find(params[:selected_invoices])
       files = []
       @invoices.each do |invoice|
         path = show_pdf_invoice_url(invoice)

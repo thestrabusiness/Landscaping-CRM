@@ -10,12 +10,12 @@ class Invoice < ActiveRecord::Base
   end
   
   def check_balance_forward
-    if client.balance == 0
-      0
-    elsif (client.balance - total < 0)
-    	1
+    if (client.balance == 0)
+      'pos_balance'      
+    elsif (balance_forward < 0)
+    	'neg_balance'
     else
-      2
+      'pos_balance'
     end
   end
 
