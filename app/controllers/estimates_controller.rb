@@ -1,5 +1,5 @@
 class EstimatesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:estimate_pdf, :view_estimate_pdf, :generate_estimate_pdf]
   before_action :set_estimate, only: [:show, :edit, :update, :destroy]
 
   # GET /estimates

@@ -56,8 +56,13 @@
                 <td><h4><%= item.name %></h4></td>
                 <%end %>
                 <td><h4><%= item.quantity %></h4></td>
+              <% if item.price == 0 %>
+                <td><h4>-</h4></td>
+                <td><h4>-</h4></td>              
+              <% else %>
                 <td><h4><%= number_to_currency(item.price) %> </h4></td>
                 <td><h4><%= number_to_currency(item.price * item.quantity) %> </h4></td>
+              <% end %>
               </tr>
             <% end %>
           </tbody>
