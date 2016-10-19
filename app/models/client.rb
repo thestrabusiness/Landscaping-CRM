@@ -1,5 +1,11 @@
 class Client < ActiveRecord::Base
-  validates :billing_address, :job_address, :city, :zip, presence: true
+  validates :billing_address, :job_address, :city, :balance, presence: true
+  validates :state, presence: true,
+                    format: {with: /\A([A-Z]+)\z/, message: "Only allows letters"},
+                    length: {is: 2}
+  validates :zip, presence: true,
+                  format: {with: /\A([0-9]+)\z/, message: "Only allows numbers"},
+                  length: {is: 5}
   
   self.primary_key = 'id'
   has_many :invoices, dependent: :destroy

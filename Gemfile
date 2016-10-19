@@ -19,7 +19,6 @@ gem 'bootstrap-sass' # Bootstrap for easy style development
 gem 'pdfkit'  # pdfkit to generate client invoices from html of invoice views --REQUIRES WKHTMLTOPDF--
 gem 'unicorn', '5.0.1'  # use unicorn because pdfkit hangs if you use webrick
 gem 'combine_pdf' # use combine_pdf to combine generated pdfs into single file for easier handling
-gem 'schema_to_scaffold' # Copy existing database schema to schema.rb file and generate scaffolds for all relevant controllers
 gem 'sunspot_rails' # sunspot search
 gem 'sunspot_solr' #solr distribution for sunspot
 gem 'will_paginate' #for pagination of search results and client/invoice/payment/etc lists
@@ -34,6 +33,12 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  #testing suite
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
   
 end
 

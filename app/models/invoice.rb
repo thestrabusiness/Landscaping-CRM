@@ -35,5 +35,14 @@ class Invoice < ActiveRecord::Base
     [date.strftime("%m/%d/%y"), client.last_name, ("$"+total.to_s)].join (' - ')
   end
   
+  def build_pdf
+    path = show_pdf_invoice_url(self)
+    filename = "invoice_#{self.id}"
+    
+    kit = PDFKit.new(path)
+    pdf = kit.to_pdf
+    send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
+  end
+  
 end
 

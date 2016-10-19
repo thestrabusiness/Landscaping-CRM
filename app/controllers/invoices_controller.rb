@@ -141,12 +141,13 @@ class InvoicesController < ApplicationController
   
   def generate_pdf
     @invoice = Invoice.find(params[:id])
-    path = show_pdf_invoice_url(@invoice)
-    filename = "invoice_#{@invoice.id}"
-    
-    kit = PDFKit.new(path)
-    pdf = kit.to_pdf
-    send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
+    @invoice.build_pdf
+#    path = show_pdf_invoice_url(@invoice)
+#    filename = "invoice_#{@invoice.id}"
+#    
+#    kit = PDFKit.new(path)
+#    pdf = kit.to_pdf
+#    send_data(pdf, :filename => filename, :type => 'application/pdf', :disposition => 'inline')
   end
   
   def generate_multiple_pdfs
