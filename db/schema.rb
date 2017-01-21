@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -22,9 +21,8 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "client_id"
+    t.index ["client_id"], name: "index_client_prices_on_client_id", using: :btree
   end
-
-  add_index "client_prices", ["client_id"], name: "index_client_prices_on_client_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "first_name"
@@ -38,7 +36,6 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "phone_number"
-    t.integer  "cut_order"
   end
 
   create_table "estimate_items", force: :cascade do |t|
@@ -48,9 +45,8 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.integer  "quantity"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["estimate_id"], name: "index_estimate_items_on_estimate_id", using: :btree
   end
-
-  add_index "estimate_items", ["estimate_id"], name: "index_estimate_items_on_estimate_id", using: :btree
 
   create_table "estimates", force: :cascade do |t|
     t.datetime "date"
@@ -59,9 +55,8 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.integer  "client_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["client_id"], name: "index_estimates_on_client_id", using: :btree
   end
-
-  add_index "estimates", ["client_id"], name: "index_estimates_on_client_id", using: :btree
 
   create_table "invoice_items", force: :cascade do |t|
     t.string   "name"
@@ -72,10 +67,9 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "client_id"
+    t.index ["client_id"], name: "index_invoice_items_on_client_id", using: :btree
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
   end
-
-  add_index "invoice_items", ["client_id"], name: "index_invoice_items_on_client_id", using: :btree
-  add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
 
   create_table "invoices", force: :cascade do |t|
     t.datetime "date"
@@ -86,9 +80,8 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.integer  "client_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["client_id"], name: "index_invoices_on_client_id", using: :btree
   end
-
-  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.date     "date"
@@ -98,10 +91,9 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.integer  "client_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["client_id"], name: "index_payments_on_client_id", using: :btree
+    t.index ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
   end
-
-  add_index "payments", ["client_id"], name: "index_payments_on_client_id", using: :btree
-  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name"
@@ -127,10 +119,9 @@ ActiveRecord::Schema.define(version: 20160813192749) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.string   "name",                   default: "Name", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "estimate_items", "estimates"
   add_foreign_key "estimates", "clients"

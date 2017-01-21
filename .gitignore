@@ -17,6 +17,7 @@
 /tmp
 
 # Ignore Solr Files
+/solr/*
 /solr
 
 # Ignore some config files
