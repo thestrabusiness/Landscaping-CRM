@@ -17,7 +17,6 @@
 /tmp
 
 # Ignore Solr Files
-/solr/*
 /solr
 
 # Ignore some config files
@@ -27,6 +26,3 @@
 
 /public
 /public/*
-
-/.idea
-/.idea/*

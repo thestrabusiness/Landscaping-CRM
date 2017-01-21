@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 
-gem 'rails', '5.0.1'
+gem 'rails', '4.2.3'
 gem 'raindrops', '0.16.0'
 gem 'rake', '10.5.0'
 gem 'sass-rails', '~> 5.0'
