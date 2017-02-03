@@ -162,8 +162,6 @@ class InvoicesController < ApplicationController
           set_multiple_paid(@invoices)
         end
     else
-      #generate pdfs from selected invoices and save each to file
-#      @invoices = Invoice.find(params[:selected_invoices])
       files = []
       @invoices.each do |invoice|
         path = show_pdf_invoice_url(invoice)

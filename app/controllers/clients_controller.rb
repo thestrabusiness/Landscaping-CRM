@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:reminder, :generate_reminders]
   before_action :set_client, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   # GET /clients
@@ -88,6 +88,36 @@ class ClientsController < ApplicationController
     @clients = Client.all.order(id: :asc)
     
     render :layout => 'pdf_layout'
+  end
+
+  def reminder
+    @client = Client.find(params[:id])
+    @date = Date.today.strftime('%m/%d/%Y')
+
+    render layout: 'pdf_layout'
+  end
+
+  def generate_reminders
+    @clients = Client.where('CAST(balance AS numeric) > ?', 0.0)
+
+    reminders = []
+    @clients.each do |client|
+      path = reminder_client_url(client)
+      filename = "#{client.last_name}_reminder_#{Time.current.strftime('%Y%m%d')}.pdf"
+      reminders << filename
+
+      kit = PDFKit.new(path)
+      pdf = kit.to_file("#{Rails.root}/reminders/#{filename}")
+    end
+
+    pdf_pack = CombinePDF.new
+    reminders.each do |reminder|
+      pdf_pack << CombinePDF.load("#{Rails.root}/reminders/#{reminder}")
+    end
+    pack_filename = "reminders_#{Date.today.to_formatted_s(:iso8601)}.pdf"
+    pdf_pack.save "#{Rails.root}/reminders/#{pack_filename}"
+
+    send_file("#{Rails.root}/reminders/#{pack_filename}", :type => 'application/pdf')
   end
   
 

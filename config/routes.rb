@@ -26,9 +26,14 @@ Rails.application.routes.draw do
   resources :services
   
   resources :clients do
-      collection do
-        post :import
-        get :summary
+    member do
+      get :reminder
+    end
+
+    collection do
+      post :import
+      get :summary
+      get :generate_reminders
     end
     
     resources :client_prices, except: [:index], controller: 'clients/client_prices' do
