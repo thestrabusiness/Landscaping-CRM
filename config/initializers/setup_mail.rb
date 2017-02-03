@@ -4,7 +4,7 @@ ActionMailer::Base.smtp_settings = {
   :port                       => '587',
   :authentication             => :plain,
   :user_name                  => 'moffalandscapemailer@gmail.com',
-  :password                   => 'newpasswordsaregreat',
+  :password                   => 'x6MwMXjFmTbP',
   :domain                     =>  'gmail.com',
   :enable_starttls_auto       => true
 }
