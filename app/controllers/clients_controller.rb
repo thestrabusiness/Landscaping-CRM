@@ -119,7 +119,12 @@ class ClientsController < ApplicationController
 
     send_file("#{Rails.root}/reminders/#{pack_filename}", :type => 'application/pdf')
   end
-  
+
+  def reminder_labels
+    @clients = Client.where('CAST(balance AS numeric) > ?', 0.0)
+
+    render layout: 'labels_layout'
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

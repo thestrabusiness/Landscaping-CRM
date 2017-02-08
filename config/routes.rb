@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post :import
       get :summary
       get :generate_reminders
+      get :reminder_labels
     end
     
     resources :client_prices, except: [:index], controller: 'clients/client_prices' do
