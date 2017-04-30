@@ -25,6 +25,8 @@ gem 'sunspot_solr' #solr distribution for sunspot
 gem 'will_paginate' #for pagination of search results and client/invoice/payment/etc lists
 gem 'rails4-autocomplete' #autocomplete function for search fields
 gem 'devise'
+gem 'yaml_db'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
