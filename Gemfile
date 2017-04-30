@@ -26,6 +26,7 @@ gem 'will_paginate' #for pagination of search results and client/invoice/payment
 gem 'rails4-autocomplete' #autocomplete function for search fields
 gem 'devise'
 gem 'yaml_db'
+gem 'psych'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
