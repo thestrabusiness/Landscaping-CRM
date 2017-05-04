@@ -95,6 +95,7 @@ GEM
     pdfkit (0.8.2)
     pg (0.18.2)
     pr_geohash (1.0.0)
+    psych (2.2.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -181,6 +182,9 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     will_paginate (3.1.0)
+    yaml_db (0.5.0)
+      rails (>= 3.0, < 5.1)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -196,6 +200,7 @@ DEPENDENCIES
   jquery-ui-rails
   pdfkit
   pg
+  psych
   rails (= 4.2.3)
   rails4-autocomplete
   raindrops (= 0.16.0)
@@ -211,3 +216,7 @@ DEPENDENCIES
   unicorn (= 5.0.1)
   web-console (~> 2.0)
   will_paginate
+  yaml_db
+
+BUNDLED WITH
+   1.14.1
