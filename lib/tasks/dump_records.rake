@@ -2,7 +2,7 @@ namespace :dump_records do
   desc 'Migrate data to new db structure'
   task dump: :environment do
 
-    MODEL_CLASSES = [Client, Service, ClientPrice]
+    MODEL_CLASSES = [Client, Service, ClientPrice, Invoice, InvoiceItem, Payment]
 
     def run
       MODEL_CLASSES.each { |klass| export_class_to_csv(klass)}
